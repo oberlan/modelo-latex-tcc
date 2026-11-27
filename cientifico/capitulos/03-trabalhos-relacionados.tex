@@ -1,0 +1,131 @@
+% ==============================================================================
+% Capítulo 3: Trabalhos relacionados
+% ==============================================================================
+\chapter{Trabalhos relacionados}
+\label{cap:relacionados}
+
+\begin{instrucao}
+\orientacao{O que vai em Trabalhos Relacionados}
+Este capítulo mostra o estado da arte, ou seja, o que já foi feito sobre o
+problema e onde o seu trabalho se encaixa. Ele responde a duas perguntas do
+avaliador: ``o autor conhece a literatura do tema?'' e ``o que este trabalho
+tem de diferente?''.
+
+Evite a estrutura ``um parágrafo por artigo'', que vira uma lista de resumos.
+Agrupe os trabalhos por abordagem (métodos exatos, heurísticas construtivas,
+metaheurísticas, híbridos), compare-os entre si e aponte limitações. Termine
+com um quadro comparativo e um parágrafo que posicione o seu trabalho em
+relação aos demais.
+
+Para encontrar trabalhos, use bases como Google Acadêmico, Scopus, IEEE
+Xplore, ACM Digital Library e o Portal de Periódicos da Capes (acessível pela
+rede da Ufes). Registre a busca (termos, bases e período) se ela fizer parte do
+método.
+\end{instrucao}
+
+Os métodos propostos para o \acs{mkp} podem ser divididos em exatos,
+heurísticos e híbridos \cite{freville2004multidimensional}. Este capítulo
+discute os trabalhos mais relevantes de cada grupo para a abordagem proposta.
+
+% ------------------------------------------------------------------------------
+\section{Métodos exatos}
+\label{sec:relacionados:exatos}
+
+Os métodos exatos para o \acs{mkp} se baseiam, em sua maioria, em
+\emph{branch-and-bound} com limitantes obtidos por relaxação linear,
+lagrangiana ou substituta \cite{freville2004multidimensional}.
+\textcite{puchinger2010multidimensional} mostraram que, em boa parte das
+instâncias, os itens da solução ótima coincidem com os de maior eficiência na
+relaxação linear, exceto por um pequeno conjunto de itens intermediários,
+chamado de núcleo. Resolver o problema restrito ao núcleo reduz o tempo de
+solução, mas instâncias com muitas restrições continuam fora do alcance dos
+métodos exatos em tempo limitado.
+
+% ------------------------------------------------------------------------------
+\section{Métodos heurísticos e híbridos}
+\label{sec:relacionados:heuristicos}
+
+Entre as metaheurísticas, o \ac{ag} de \textcite{chu1998genetic} tornou-se uma
+referência para o problema. O método usa um operador de reparo que remove e
+insere itens segundo uma razão de utilidade derivada da relaxação do problema,
+o que garante que toda solução gerada seja viável. Os autores também
+publicaram as 270 instâncias usadas nos experimentos, que se tornaram o
+conjunto padrão de comparação na área.
+
+Abordagens híbridas combinam programação matemática e busca heurística.
+\textcite{vasquez2001hybrid} usam a relaxação linear para fixar o número de
+itens da solução e aplicam busca tabu nas regiões indicadas por ela, obtendo
+alguns dos melhores resultados conhecidos para as maiores instâncias da
+OR-Library. Em contrapartida, o método exige resolver vários programas lineares
+e tem diversos parâmetros, o que dificulta sua reprodução. A combinação de
+núcleo com algoritmo memético e resolução exata proposta por
+\textcite{puchinger2010multidimensional} segue a mesma linha.
+
+% ------------------------------------------------------------------------------
+\section{Síntese e posicionamento do trabalho}
+\label{sec:relacionados:sintese}
+
+O \cref{qua:relacionados} resume as abordagens discutidas e as compara com a
+proposta deste trabalho. Observa-se que os métodos de melhor desempenho
+dependem da resolução repetida de relaxações lineares ou de muitos parâmetros.
+A heurística proposta procura um meio-termo, com poucos parâmetros, sem
+resolver programas lineares durante a busca e com desempenho competitivo em
+tempo limitado.
+
+\begin{quadro}[htbp]
+  \centering
+  \caption{Comparação entre os trabalhos relacionados e a proposta}
+  \label{qua:relacionados}
+  \small
+  \begin{tabularx}{\textwidth}{|l|X|c|}
+    \hline
+    \textbf{Trabalho} & \textbf{Abordagem} & \textbf{Tipo} \\
+    \hline
+    \textcite{chu1998genetic} & \Acs{ag} com operador de reparo baseado em
+      razão de utilidade & Heurístico \\
+    \hline
+    \textcite{vasquez2001hybrid} & Relaxação linear para guiar uma busca tabu
+      & Híbrido \\
+    \hline
+    \textcite{puchinger2010multidimensional} & Redução ao núcleo do problema
+      com algoritmo memético e resolução exata & Híbrido \\
+    \hline
+    Este trabalho & \Acs{ils} com perturbação adaptativa e solução inicial gulosa
+      & Heurístico \\
+    \hline
+  \end{tabularx}
+  \fonteautor
+\end{quadro}
+
+\begin{instrucao}
+\orientacao{Quadro ou tabela?}
+A NBR 14724 distingue os dois. O \textbf{quadro} organiza informações
+textuais em linhas e colunas e tem bordas fechadas, com linhas verticais. A
+\textbf{tabela} apresenta dados, em geral numéricos, e segue as normas do
+IBGE, com bordas laterais abertas e sem linhas verticais (veja a
+\cref{tab:resultados} no \cref{cap:experimentos}). Quadros e tabelas têm listas
+e numeração próprias. A identificação fica acima e a fonte abaixo, como nas
+figuras.
+\begin{exemplocodigo}
+\begin{quadro}[htbp]
+  \centering
+  \caption{Comparação entre os trabalhos}
+  \label{qua:relacionados}
+  \small
+  \begin{tabularx}{\textwidth}{|l|X|c|}
+    \hline
+    \textbf{Trabalho} & \textbf{Abordagem} & \textbf{Tipo} \\
+    \hline
+    \textcite{chu1998genetic} & Algoritmo genético ... & Heurístico \\
+    \hline
+  \end{tabularx}
+  \fonteautor
+\end{quadro}
+\end{exemplocodigo}
+A coluna \verb|X| do pacote \verb|tabularx| ocupa a largura que sobra e quebra
+o texto em várias linhas. Para montar tabelas e quadros mais elaborados, o site
+\href{https://www.tablesgenerator.com/}{Tables Generator}
+(\url{https://www.tablesgenerator.com/}) gera o código LaTeX a partir de uma
+planilha. Depois de colar o código, ajuste-o ao padrão do modelo (ambiente
+\verb|table| ou \verb|quadro|, \verb|\caption| acima e \verb|\fonte| abaixo).
+\end{instrucao}

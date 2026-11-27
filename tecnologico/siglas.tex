@@ -1,0 +1,75 @@
+% ==============================================================================
+% Siglas e abreviaturas (pacote acro)
+% ------------------------------------------------------------------------------
+% Declare aqui cada sigla uma única vez. No texto, use:
+%   \ac{chave}   primeira ocorrência: forma extensa seguida da sigla entre
+%                parênteses; nas seguintes, só a sigla;
+%   \acs{chave}  sempre a sigla (use em títulos e legendas);
+%   \acl{chave}  sempre a forma extensa;
+%   \acp{chave}  plural da sigla.
+% A lista de abreviaturas e siglas é montada automaticamente, em ordem
+% alfabética, apenas com as siglas usadas no texto.
+%
+% Campos:
+%   short   sigla;
+%   long    forma extensa usada no texto;
+%   list    forma extensa na lista (opcional, para ajustar maiúsculas);
+%   foreign forma original, quando a sigla vem de outro idioma.
+% ==============================================================================
+
+\DeclareAcronym{rf}{
+  short = RF,
+  long  = requisito funcional,
+  list  = Requisito funcional,
+  long-plural-form = requisitos funcionais,
+}
+
+\DeclareAcronym{rnf}{
+  short = RNF,
+  long  = requisito não funcional,
+  list  = Requisito não funcional,
+  long-plural-form = requisitos não funcionais,
+}
+
+\DeclareAcronym{mtv}{
+  short   = MTV,
+  long    = {modelo, \emph{template} e visão},
+  list    = {Modelo, \emph{template} e visão},
+  foreign = Model-Template-View,
+  foreign-babel = english,
+}
+
+\DeclareAcronym{orm}{
+  short   = ORM,
+  long    = mapeamento objeto-relacional,
+  list    = Mapeamento objeto-relacional,
+  foreign = Object-Relational Mapping,
+  foreign-babel = english,
+}
+
+\DeclareAcronym{sus}{
+  short   = SUS,
+  long    = escala de usabilidade de sistemas,
+  list    = Escala de usabilidade de sistemas,
+  foreign = System Usability Scale,
+  foreign-babel = english,
+}
+
+\DeclareAcronym{uml}{
+  short   = UML,
+  long    = linguagem de modelagem unificada,
+  list    = Linguagem de modelagem unificada,
+  foreign = Unified Modeling Language,
+  foreign-babel = english,
+}
+
+\DeclareAcronym{ia}{
+  short = IA,
+  long  = inteligência artificial,
+  list  = Inteligência artificial,
+}
+
+\DeclareAcronym{abnt}{
+  short = ABNT,
+  long  = Associação Brasileira de Normas Técnicas,
+}

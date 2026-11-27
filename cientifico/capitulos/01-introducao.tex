@@ -1,0 +1,259 @@
+% ==============================================================================
+% Capítulo 1: Introdução
+% ==============================================================================
+\chapter{Introdução}
+\label{cap:introducao}
+
+\begin{instrucao}
+\orientacao{O que vai na Introdução}
+A Introdução situa quem lê o trabalho. Ela apresenta o contexto do tema, o problema
+tratado, os objetivos, a justificativa e a organização do texto. Como
+referência, de três a cinco páginas costumam ser suficientes. Escreva uma
+primeira versão no início do trabalho e reescreva no final, quando os
+resultados estiverem claros, porque a Introdução promete o que o resto do texto
+precisa cumprir.
+
+Comece pelo geral e avance até o problema específico. Um bom primeiro parágrafo
+responde ``por que este assunto importa?'' sem frases genéricas como ``com o
+avanço da tecnologia\ldots''.
+
+\orientacao{Capítulo ou seção?}
+A NBR 14724:2024 determina que o trabalho seja dividido em seções, e não em
+capítulos. No LaTeX nada muda (continue usando \verb|\chapter|, que gera o
+título ``1 INTRODUÇÃO''). A diferença está só no nome usado nas referências
+cruzadas, que este modelo controla pelo comando \verb|\termocap| em
+\verb|config/estilo.tex|. O padrão segue as regras de TCC do curso
+(``Capítulo'').
+
+\orientacao{Rótulos}
+Logo após cada \verb|\chapter| ou \verb|\section|, coloque um
+\verb|\label| com um prefixo que indique o tipo: \verb|cap:| para capítulos,
+\verb|sec:| para seções, \verb|fig:| para figuras, \verb|tab:| para tabelas,
+\verb|qua:| para quadros, \verb|eq:| para equações e assim por diante. Nunca
+use acentos ou espaços nos rótulos.
+\end{instrucao}
+
+\begin{instrucao}
+\orientacao{Pessoa verbal e estilo acadêmico}
+Textos acadêmicos são escritos, por convenção, de forma impessoal. A NBR
+14724:2024 não determina a pessoa verbal do trabalho, mas a NBR 6028:2021
+recomenda o verbo na terceira pessoa no resumo (item 4.1.4). Este modelo
+estende essa recomendação a todo o texto, para que ele fique uniforme. Use:
+\begin{itemize}
+  \item a terceira pessoa do singular, com o trabalho, o método ou o sistema
+        como sujeito (``este trabalho propõe'', ``a heurística obteve'',
+        ``o sistema permite'');
+  \item ou a voz passiva (``os experimentos foram executados'', ``observa-se
+        que'', ``adotou-se'').
+\end{itemize}
+Evite a primeira pessoa do singular (``eu proponho'') e do plural (``nós
+propomos'', ``vamos mostrar''), mesmo como plural de modéstia. Algumas áreas
+aceitam o ``nós'', mas a forma impessoal é a convenção predominante nos
+trabalhos acadêmicos. Qualquer que seja a escolha, não misture as duas formas
+no mesmo texto, um erro frequente nos TCCs. As exceções são
+os agradecimentos, a dedicatória e a declaração de uso de inteligência
+artificial, escritos na primeira pessoa do singular por serem manifestações
+pessoais do autor.
+
+\begin{itemize}
+  \item \textbf{Evite:} ``Neste trabalho, vamos propor uma heurística e
+        mostraremos que ela é melhor.''
+  \item \textbf{Prefira:} ``Este trabalho propõe uma heurística e avalia seu
+        desempenho em relação a \ldots''
+\end{itemize}
+
+Algumas regras de redação ajudam o texto a soar claro e profissional:
+\begin{itemize}
+  \item escreva frases diretas e evite expressões de preenchimento como ``vale
+        ressaltar que'' e ``é importante notar que'';
+  \item evite adjetivos de efeito (``crucial'', ``poderoso'', ``robusto'') e
+        afirmações sem dados ou citação (``muito usado'', ``o melhor método'');
+  \item não use linguagem coloquial nem perguntas retóricas;
+  \item use vírgula decimal e ponto como separador de milhar (0,41\% e
+        1.200), inclusive em tabelas e gráficos.
+\end{itemize}
+\end{instrucao}
+
+Muitas decisões de planejamento envolvem escolher, dentre várias alternativas,
+aquelas que trazem o maior retorno sem ultrapassar recursos limitados. Uma
+universidade que seleciona projetos de extensão para financiar precisa
+respeitar ao mesmo tempo o orçamento, a carga horária dos docentes e o número
+de bolsas disponíveis. Um provedor de computação em nuvem que aloca tarefas a
+um servidor precisa respeitar a capacidade de processamento, de memória e de
+armazenamento da máquina. Em ambos os casos, cada alternativa consome uma
+quantidade diferente de cada recurso.
+
+Esse tipo de decisão é modelado pelo \ac{mkp}, um dos problemas mais estudados
+da otimização combinatória \cite{freville2004multidimensional,
+puchinger2010multidimensional}. No \acs{mkp}, cada item tem um valor e um peso
+em cada uma de várias dimensões e o objetivo é escolher o subconjunto de itens
+de maior valor total que respeite a capacidade de todas as dimensões.
+
+\begin{instrucao}
+\orientacao{Siglas}
+Declare cada sigla uma única vez no arquivo \verb|cientifico/siglas.tex| e use
+\verb|\ac{chave}| no texto. Na primeira ocorrência o LaTeX escreve a forma
+extensa seguida da sigla. Nas seguintes, apenas a sigla. A lista de siglas é
+montada sozinha, só com as siglas usadas.
+\begin{exemplo}
+A \ac{abnt} publica as normas.
+Este trabalho segue as
+normas da \ac{abnt}.
+\end{exemplo}
+\acreset{abnt}% desfaz o uso da sigla no exemplo acima
+Em títulos e legendas use \verb|\acs{chave}|, que imprime só a sigla e não
+interfere na contagem da primeira ocorrência. Não use \verb|\ac| no resumo, que
+deve ser compreensível sem consultar a lista.
+\end{instrucao}
+
+% ------------------------------------------------------------------------------
+\section{Problema e questão de pesquisa}
+\label{sec:introducao:problema}
+
+O \acs{mkp} pertence à classe dos problemas NP-difíceis \cite{kellerer2004knapsack}.
+Na prática, isso significa que não se conhece algoritmo capaz de resolver todas
+as instâncias de forma exata em tempo polinomial. Solucionadores de \ac{pli}
+encontram a solução ótima de instâncias pequenas em poucos segundos, mas o
+tempo de execução cresce rapidamente com o número de itens e de restrições.
+Para instâncias com 500 itens e 30 restrições, mesmo solucionadores comerciais
+podem levar horas sem provar a otimalidade \cite{puchinger2010multidimensional}.
+
+Nesses casos, heurísticas e metaheurísticas são a alternativa mais usada,
+porque encontram soluções de boa qualidade em tempo limitado, ainda que sem
+garantia de otimalidade. Diante disso, este trabalho busca responder à
+seguinte questão de pesquisa: \emph{uma heurística de \ac{ils} com perturbação
+adaptativa consegue obter, em até 60 segundos, soluções para o \acs{mkp} mais
+próximas das melhores conhecidas do que um solucionador de \acs{pli} no mesmo
+tempo?}
+
+\begin{instrucao}
+\orientacao{Problema, questão de pesquisa e hipótese}
+Em um trabalho científico, deixe explícito qual pergunta o trabalho responde.
+Uma boa questão de pesquisa é específica e verificável pelos experimentos. A
+pergunta acima define o método (\acs{ils}), a comparação (solucionador de
+\acs{pli}), a métrica (proximidade das melhores soluções) e a condição (60
+segundos). Se preferir, formule uma hipótese, que é uma resposta provisória à
+pergunta e será confirmada ou refutada pelos resultados.
+\end{instrucao}
+
+% ------------------------------------------------------------------------------
+\section{Objetivos}
+\label{sec:introducao:objetivos}
+
+\begin{instrucao}
+\orientacao{Como escrever os objetivos}
+O \textbf{objetivo geral} expressa o resultado principal do trabalho em uma
+única frase iniciada por verbo no infinitivo. Os \textbf{objetivos
+específicos} são os resultados intermediários que, juntos, levam ao objetivo
+geral. Cada um deve ser verificável, ou seja, ao final do trabalho deve ser
+possível dizer se foi alcançado e em que capítulo isso aparece.
+
+Prefira verbos que indiquem um resultado concreto: \emph{propor},
+\emph{implementar}, \emph{comparar}, \emph{avaliar}, \emph{identificar},
+\emph{desenvolver}, \emph{analisar}. Evite verbos vagos como \emph{estudar},
+\emph{conhecer}, \emph{entender} ou \emph{aprender}, que descrevem o processo
+de estudo, e não o resultado do trabalho.
+
+\begin{itemize}
+  \item \textbf{Fraco:} ``Estudar metaheurísticas para o problema da mochila.''
+  \item \textbf{Melhor:} ``Propor e avaliar uma heurística de busca local
+        iterada para o problema da mochila multidimensional.''
+\end{itemize}
+
+Na Conclusão, retome cada objetivo específico e diga como ele foi atingido.
+Para listas numeradas por letras, como pede a NBR 6024 para alíneas, use o
+ambiente \verb|alineas| do abnTeX2.
+\begin{exemplo}
+\begin{alineas}
+  \item primeiro item;
+  \item segundo item.
+\end{alineas}
+\end{exemplo}
+\end{instrucao}
+
+O objetivo geral deste trabalho é propor e avaliar uma heurística de \ac{ils}
+para o \acs{mkp} capaz de obter soluções de boa qualidade em tempo limitado.
+Para alcançá-lo, foram definidos os seguintes objetivos específicos:
+\begin{alineas}
+  \item identificar, na literatura, as principais abordagens heurísticas para
+        o \acs{mkp} e as instâncias usadas para avaliá-las;
+  \item propor uma heurística de \acs{ils} com perturbação adaptativa para o
+        problema;
+  \item implementar a heurística e um modelo de \acs{pli} resolvido pelo
+        solucionador HiGHS;
+  \item comparar o desempenho da heurística com o do solucionador e com o de
+        um \ac{ag} da literatura em instâncias de referência;
+  \item avaliar a contribuição de cada componente da heurística para o
+        resultado final.
+\end{alineas}
+
+% ------------------------------------------------------------------------------
+\section{Justificativa}
+\label{sec:introducao:justificativa}
+
+\begin{instrucao}
+\orientacao{Justificativa e citações}
+A justificativa mostra por que o trabalho é relevante. Apoie-se em trabalhos
+anteriores, aponte as limitações deles e mostre a lacuna que o seu trabalho
+procura preencher. Toda afirmação que não seja de conhecimento geral da área
+precisa de citação.
+
+Este modelo usa o biblatex-abnt, que segue a NBR 10520:2023. Na nova norma, o
+sobrenome do autor aparece com apenas a inicial maiúscula também dentro dos
+parênteses, como em (Chu; Beasley, 1998). Use \verb|\textcite| quando o autor
+faz parte da frase e \verb|\cite| quando a citação vai entre parênteses.
+\begin{exemplo}
+Segundo \textcite{chu1998genetic},
+o problema é difícil.
+
+O problema é difícil
+\cite{chu1998genetic}.
+
+Com página:
+\cite[p.~70]{chu1998genetic}.
+
+Várias obras: \cite{chu1998genetic,
+kellerer2004knapsack}.
+\end{exemplo}
+As chaves (como \verb|chu1998genetic|) são definidas no arquivo
+\verb|referencias.bib|. Só entram nas Referências as obras citadas no texto.
+Para citação de citação (\emph{apud}), use
+\verb|\apud{obra-original}{obra-consultada}|, lembrando que a obra original
+não entra nas referências se você não teve acesso a ela.
+\end{instrucao}
+
+O \acs{mkp} tem sido estudado há décadas e conta com um conjunto de instâncias
+de referência amplamente usado, disponibilizado por \textcite{chu1998genetic}
+na OR-Library\footnote{Disponível em
+\url{https://people.brunel.ac.uk/~mastjjb/jeb/orlib/mknapinfo.html}.}. Esse
+conjunto permite comparar novas abordagens com resultados já publicados, o que
+torna o problema adequado para avaliar ideias de projeto de heurísticas.
+
+Apesar do grande número de métodos propostos, muitos dependem de
+procedimentos sofisticados, como a combinação de programação linear com busca
+tabu \cite{vasquez2001hybrid}, que são difíceis de reproduzir e de adaptar a
+variantes do problema \cite{puchinger2010multidimensional}. Uma heurística
+simples, com poucos parâmetros e bom desempenho em tempo limitado, é útil
+tanto como método de solução quanto como ponto de partida para variantes com
+restrições adicionais.
+
+% ------------------------------------------------------------------------------
+\section{Organização do trabalho}
+\label{sec:introducao:organizacao}
+
+\begin{instrucao}
+\orientacao{Organização do texto}
+Feche a Introdução descrevendo, em um parágrafo ou em uma lista curta, o que
+cada capítulo apresenta. Use \verb|\Cref{rotulo}| no início da frase e
+\verb|\cref{rotulo}| no meio dela. O número é atualizado sozinho se a ordem dos
+capítulos mudar.
+\end{instrucao}
+
+Além desta introdução, o trabalho está organizado da seguinte forma. O
+\cref{cap:fundamentacao} apresenta a formulação matemática do \acs{mkp} e os
+conceitos de metaheurísticas usados no trabalho. O \cref{cap:relacionados}
+discute os principais trabalhos da literatura sobre o problema. O
+\cref{cap:metodologia} descreve a heurística proposta e o planejamento dos
+experimentos, cujos resultados são apresentados e discutidos no
+\cref{cap:experimentos}. Por fim, o \cref{cap:conclusao} retoma os objetivos,
+resume as contribuições e aponta trabalhos futuros.

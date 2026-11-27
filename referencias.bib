@@ -1,0 +1,288 @@
+% ==============================================================================
+% referencias.bib
+% Base de referências do trabalho, processada pelo Biber com o estilo
+% biblatex-abnt. As entradas abaixo servem de exemplo para os dois modelos
+% (científico e tecnológico). Apague as que não usar: o Biber só inclui nas
+% Referências o que for citado no texto.
+%
+% Dicas
+%   * Prefira copiar o BibTeX da editora, do DBLP (dblp.org) ou do Google
+%     Acadêmico e depois conferir os campos. Esses arquivos costumam vir com
+%     erros (nomes abreviados, títulos em caixa alta, páginas faltando).
+%   * Para manter maiúsculas em siglas e nomes próprios no título, use chaves:
+%     title = {Um estudo sobre {SQL} e {Python}}.
+%   * Páginas usam dois hifens: pages = {63--86}.
+%   * Páginas web, softwares e ferramentas de IA: use @misc com os campos
+%     url e urldate (data de acesso no formato AAAA-MM-DD).
+%   * Autor institucional entre chaves duplas, com sigla em shortauthor:
+%     author = {{Associação Brasileira de Normas Técnicas}}, shortauthor = {ABNT}.
+% ==============================================================================
+
+% ------------------------------------------------------------------------------
+% Normas e documentos institucionais
+% ------------------------------------------------------------------------------
+@book{abnt2024trabalhos,
+  author      = {{Associação Brasileira de Normas Técnicas}},
+  shortauthor = {ABNT},
+  title       = {{NBR} 14724},
+  subtitle    = {informação e documentação: trabalhos acadêmicos: apresentação},
+  edition     = {4},
+  location    = {Rio de Janeiro},
+  publisher   = {ABNT},
+  year        = {2024},
+}
+
+@book{abnt2023citacoes,
+  author      = {{Associação Brasileira de Normas Técnicas}},
+  shortauthor = {ABNT},
+  title       = {{NBR} 10520},
+  subtitle    = {informação e documentação: citações em documentos: apresentação},
+  edition     = {2},
+  location    = {Rio de Janeiro},
+  publisher   = {ABNT},
+  year        = {2023},
+}
+
+@book{abnt2025referencias,
+  author      = {{Associação Brasileira de Normas Técnicas}},
+  shortauthor = {ABNT},
+  title       = {{NBR} 6023},
+  subtitle    = {informação e documentação: referências: elaboração},
+  edition     = {3},
+  location    = {Rio de Janeiro},
+  publisher   = {ABNT},
+  year        = {2025},
+}
+
+@book{abnt2021resumo,
+  author      = {{Associação Brasileira de Normas Técnicas}},
+  shortauthor = {ABNT},
+  title       = {{NBR} 6028},
+  subtitle    = {informação e documentação: resumo, resenha e recensão: apresentação},
+  edition     = {2},
+  location    = {Rio de Janeiro},
+  publisher   = {ABNT},
+  year        = {2021},
+}
+
+@misc{ufes2026portaria,
+  author      = {{Universidade Federal do Espírito Santo}},
+  shortauthor = {Ufes},
+  title       = {Portaria Normativa nº 310, de 23 de outubro de 2026},
+  note        = {Dispõe sobre o uso de sistemas de inteligência artificial no
+                 âmbito da Universidade Federal do Espírito Santo},
+  location    = {Vitória},
+  publisher   = {Ufes},
+  year        = {2026},
+}
+
+@article{lovelace1843sketch,
+  author       = {Lovelace, Ada Augusta},
+  title        = {Sketch of the Analytical Engine invented by Charles Babbage, by
+                  {L. F. Menabrea}: with notes upon the memoir by the translator},
+  journaltitle = {Scientific Memoirs},
+  volume       = {3},
+  pages        = {666--731},
+  year         = {1843},
+}
+
+% ------------------------------------------------------------------------------
+% Modelo científico (problema da mochila multidimensional)
+% ------------------------------------------------------------------------------
+@article{chu1998genetic,
+  author       = {Chu, Paul C. and Beasley, John E.},
+  title        = {A genetic algorithm for the multidimensional knapsack problem},
+  journaltitle = {Journal of Heuristics},
+  volume       = {4},
+  number       = {1},
+  pages        = {63--86},
+  year         = {1998},
+}
+
+@article{freville2004multidimensional,
+  author       = {Fréville, Arnaud},
+  title        = {The multidimensional 0--1 knapsack problem: an overview},
+  journaltitle = {European Journal of Operational Research},
+  volume       = {155},
+  number       = {1},
+  pages        = {1--21},
+  year         = {2004},
+}
+
+@article{puchinger2010multidimensional,
+  author       = {Puchinger, Jakob and Raidl, Günther R. and Pferschy, Ulrich},
+  title        = {The multidimensional knapsack problem: structure and algorithms},
+  journaltitle = {{INFORMS} Journal on Computing},
+  volume       = {22},
+  number       = {2},
+  pages        = {250--265},
+  year         = {2010},
+}
+
+@book{kellerer2004knapsack,
+  author    = {Kellerer, Hans and Pferschy, Ulrich and Pisinger, David},
+  title     = {Knapsack problems},
+  location  = {Berlin},
+  publisher = {Springer},
+  year      = {2004},
+}
+
+@book{wolsey2020integer,
+  author    = {Wolsey, Laurence A.},
+  title     = {Integer programming},
+  edition   = {2},
+  location  = {Hoboken},
+  publisher = {Wiley},
+  year      = {2020},
+}
+
+@incollection{lourenco2019iterated,
+  author    = {Lourenço, Helena R. and Martin, Olivier C. and Stützle, Thomas},
+  title     = {Iterated local search: framework and applications},
+  editor    = {Gendreau, Michel and Potvin, Jean-Yves},
+  booktitle = {Handbook of metaheuristics},
+  edition   = {3},
+  location  = {Cham},
+  publisher = {Springer},
+  pages     = {129--168},
+  year      = {2019},
+}
+
+@inproceedings{vasquez2001hybrid,
+  author    = {Vasquez, Michel and Hao, Jin-Kao},
+  title     = {A hybrid approach for the 0--1 multidimensional knapsack problem},
+  booktitle = {Proceedings of the 17th International Joint Conference on
+               Artificial Intelligence ({IJCAI})},
+  location  = {Seattle},
+  pages     = {328--333},
+  year      = {2001},
+}
+
+@article{huangfu2018parallelizing,
+  author       = {Huangfu, Qi and Hall, Julian A. J.},
+  title        = {Parallelizing the dual revised simplex method},
+  journaltitle = {Mathematical Programming Computation},
+  volume       = {10},
+  number       = {1},
+  pages        = {119--142},
+  year         = {2018},
+}
+
+@misc{openai2026chatgpt,
+  author      = {{OpenAI}},
+  title       = {{ChatGPT}},
+  version     = {GPT-5},
+  note        = {Modelo de linguagem de grande escala},
+  url         = {https://chatgpt.com},
+  urldate     = {2026-11-20},
+  year        = {2026},
+}
+
+% ------------------------------------------------------------------------------
+% Modelo tecnológico (sistema de agendamento de monitorias)
+% ------------------------------------------------------------------------------
+@book{sommerville2018engenharia,
+  author    = {Sommerville, Ian},
+  title     = {Engenharia de software},
+  edition   = {10},
+  location  = {São Paulo},
+  publisher = {Pearson},
+  year      = {2018},
+}
+
+@book{pressman2021engenharia,
+  author    = {Pressman, Roger S. and Maxim, Bruce R.},
+  title     = {Engenharia de software},
+  subtitle  = {uma abordagem profissional},
+  edition   = {9},
+  location  = {Porto Alegre},
+  publisher = {AMGH},
+  year      = {2021},
+}
+
+@book{cohn2004user,
+  author    = {Cohn, Mike},
+  title     = {User stories applied},
+  subtitle  = {for agile software development},
+  location  = {Boston},
+  publisher = {Addison-Wesley},
+  year      = {2004},
+}
+
+@book{bass2021software,
+  author    = {Bass, Len and Clements, Paul and Kazman, Rick},
+  title     = {Software architecture in practice},
+  edition   = {4},
+  location  = {Boston},
+  publisher = {Addison-Wesley},
+  year      = {2021},
+}
+
+@incollection{brooke1996sus,
+  author    = {Brooke, John},
+  title     = {{SUS}: a quick and dirty usability scale},
+  editor    = {Jordan, Patrick W. and Thomas, B. and Weerdmeester, Bernard A.
+               and McClelland, Ian L.},
+  booktitle = {Usability evaluation in industry},
+  location  = {London},
+  publisher = {Taylor \& Francis},
+  pages     = {189--194},
+  year      = {1996},
+}
+
+@article{bangor2009determining,
+  author       = {Bangor, Aaron and Kortum, Philip and Miller, James},
+  title        = {Determining what individual {SUS} scores mean: adding an
+                  adjective rating scale},
+  journaltitle = {Journal of Usability Studies},
+  volume       = {4},
+  number       = {3},
+  pages        = {114--123},
+  year         = {2009},
+}
+
+@misc{schwaber2020scrum,
+  author  = {Schwaber, Ken and Sutherland, Jeff},
+  title   = {The Scrum guide},
+  url     = {https://scrumguides.org/},
+  urldate = {2026-11-20},
+  year    = {2020},
+}
+
+@misc{django2026documentation,
+  author      = {{Django Software Foundation}},
+  shortauthor = {DSF},
+  title       = {Django documentation},
+  version     = {5.2},
+  url         = {https://docs.djangoproject.com/},
+  urldate     = {2026-11-20},
+  year        = {2026},
+}
+
+@misc{vanrossum2001pep8,
+  author  = {van Rossum, Guido and Warsaw, Barry and Coghlan, Alyssa},
+  title   = {{PEP} 8: style guide for {Python} code},
+  url     = {https://peps.python.org/pep-0008/},
+  urldate = {2026-11-20},
+  year    = {2001},
+}
+
+@book{iso2018usability,
+  author      = {{International Organization for Standardization}},
+  shortauthor = {ISO},
+  title       = {{ISO} 9241-11},
+  subtitle    = {ergonomics of human-system interaction: part 11: usability:
+                 definitions and concepts},
+  location    = {Geneva},
+  publisher   = {ISO},
+  year        = {2018},
+}
+
+@misc{github2026copilot,
+  author  = {{GitHub}},
+  title   = {{GitHub Copilot}},
+  note    = {Assistente de programação baseado em inteligência artificial},
+  url     = {https://github.com/features/copilot},
+  urldate = {2026-11-20},
+  year    = {2026},
+}

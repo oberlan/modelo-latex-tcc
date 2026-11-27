@@ -1,0 +1,177 @@
+% ==============================================================================
+% Capítulo 6: Implementação
+% ==============================================================================
+\chapter{Implementação}
+\label{cap:implementacao}
+
+\begin{instrucao}
+\orientacao{O que vai na Implementação}
+Este capítulo mostra como o projeto foi transformado em software. Inclua:
+\begin{itemize}
+  \item o ambiente e as ferramentas de desenvolvimento;
+  \item a organização do código e os padrões de documentação e codificação
+        adotados;
+  \item trechos de código que mostrem soluções relevantes ou não óbvias, e
+        não o código inteiro;
+  \item as telas principais do sistema, relacionadas aos requisitos que
+        atendem;
+  \item como o sistema foi implantado.
+\end{itemize}
+O texto não deve ser um manual do usuário. Mostre as telas para evidenciar que
+os requisitos foram atendidos e explique o que cada uma permite fazer. Um
+manual completo, se existir, vai para um apêndice. Informe o endereço do
+repositório com o código-fonte.
+\end{instrucao}
+
+Este capítulo descreve a implementação do Monitora. A
+\cref{sec:implementacao:organizacao} apresenta a organização do código, a
+\cref{sec:implementacao:reserva} detalha a implementação da reserva de
+horários, a \cref{sec:implementacao:implantacao} descreve a implantação e a
+\cref{sec:implementacao:ia} relata o uso de ferramentas de inteligência
+artificial.
+
+% ------------------------------------------------------------------------------
+\section{Ambiente e organização do código}
+\label{sec:implementacao:organizacao}
+
+O sistema foi desenvolvido no Visual Studio Code, com controle de versões no
+Git e repositório hospedado no GitHub\footnote{O endereço do repositório deve
+ser informado aqui, por exemplo, \url{https://github.com/usuario/monitora}.}.
+O código segue a estrutura padrão de projetos Django, com um diretório por
+módulo (\texttt{contas}, \texttt{agenda} e \texttt{relatorios}), cada um com
+seus modelos, visões, \emph{templates} e testes. A formatação segue o guia
+PEP~8 \cite{vanrossum2001pep8}, verificada automaticamente pela ferramenta
+Ruff a cada \emph{commit}. Funções e classes públicas são documentadas com
+\emph{docstrings}.
+
+% ------------------------------------------------------------------------------
+\section{Reserva de horários}
+\label{sec:implementacao:reserva}
+
+O \cref{cod:conflito} mostra o modelo \texttt{Reserva} e a função que cria
+uma reserva. A restrição de unicidade declarada nas linhas 13 a 17 implementa
+a decisão de projeto discutida na \cref{sec:projeto:decisoes}. Se duas
+requisições tentarem reservar o mesmo horário na mesma data, o banco de dados
+aceita apenas a primeira e a segunda gera um \texttt{IntegrityError}. A
+função \texttt{reservar} (linhas 24 a 33) converte esse erro em uma exceção
+do domínio, tratada pela visão, que exibe ao estudante a mensagem de que o
+horário acabou de ser ocupado.
+
+\begin{codigo}[htbp]
+  \caption{Modelo \texttt{Reserva} e função de reserva com tratamento de conflito}
+  \label{cod:conflito}
+  \lstinputlisting[language=Python]{codigos/reservas.py}
+  \fonteautor
+\end{codigo}
+
+\begin{instrucao}
+\orientacao{Códigos-fonte}
+Inclua apenas trechos curtos e relevantes, em geral com menos de 30 linhas.
+O código completo fica no repositório. Coloque o trecho no ambiente
+\verb|codigo|, que tem legenda acima, fonte abaixo e lista própria (Lista de
+códigos). Para não copiar o código para dentro do \verb|.tex|, guarde o
+arquivo na pasta \verb|codigos/| e use \verb|\lstinputlisting|. As opções
+\verb|firstline| e \verb|lastline| permitem mostrar só parte do arquivo.
+\begin{exemplocodigo}
+\begin{codigo}[htbp]
+  \caption{Função de reserva}
+  \label{cod:reserva}
+  \lstinputlisting[language=Python, firstline=24, lastline=33]{codigos/reservas.py}
+  \fonteautor
+\end{codigo}
+\end{exemplocodigo}
+Para trechos muito curtos, escritos direto no texto, use o ambiente
+\verb|lstlisting| dentro do \verb|codigo|. Explique o código no texto citando
+os números das linhas, como no parágrafo acima. Nunca use capturas de tela de
+código, que não podem ser lidas por leitores de tela nem copiadas.
+
+Algoritmos devem ser apresentados em pseudocódigo, e não em uma linguagem
+específica. O modelo científico mostra como fazer isso com o ambiente
+\verb|algoritmo| e o pacote \verb|algpseudocode|.
+\end{instrucao}
+
+% ------------------------------------------------------------------------------
+\section{Telas do sistema}
+\label{sec:implementacao:telas}
+
+\begin{instrucao}
+\orientacao{Telas}
+Mostre as telas que correspondem aos requisitos principais, uma por figura,
+com legenda que diga o que a tela permite fazer, e cite no texto os
+requisitos atendidos. Capture as telas em PNG, na resolução original e com
+zoom de 100\%, preenchidas com dados fictícios (nunca dados pessoais reais de
+estudantes). Para incluir uma captura de tela:
+\begin{exemplocodigo}
+\begin{figure}[htbp]
+  \centering
+  \caption{Tela de reserva de horários (RF02 e RF03)}
+  \label{fig:tela-reserva}
+  \includegraphics[width=0.9\textwidth]{figuras/tecnologico/tela-reserva.png}
+  \fonteautor
+\end{figure}
+\end{exemplocodigo}
+Duas telas relacionadas podem ser apresentadas lado a lado com o pacote
+\verb|subcaption|, usando \verb|\begin{subfigure}{0.48\textwidth}| dentro do
+ambiente \verb|figure|.
+\end{instrucao}
+
+A tela de reserva segue o protótipo apresentado na \cref{fig:prototipo}. O
+estudante escolhe a disciplina no menu lateral e vê a grade semanal com os
+horários livres e o nome de cada monitor (RF02). Ao selecionar um horário, uma
+janela de confirmação mostra a data, o monitor e o local do atendimento
+(RF03). As reservas do estudante ficam disponíveis no item ``Minhas
+reservas'', no qual também é possível cancelá-las (RF04).
+
+% ------------------------------------------------------------------------------
+\section{Implantação}
+\label{sec:implementacao:implantacao}
+
+O sistema é distribuído em três contêineres Docker, descritos em um arquivo
+do Docker Compose, que executam o Nginx, a aplicação Django com o Gunicorn e
+o PostgreSQL. A tarefa de envio de lembretes é executada
+diariamente pelo agendador do próprio servidor. A versão avaliada no
+\cref{cap:testes} foi implantada em uma máquina virtual de homologação
+cedida pelo departamento.
+
+% ------------------------------------------------------------------------------
+\section{Uso de ferramentas de inteligência artificial}
+\label{sec:implementacao:ia}
+
+Durante a implementação, o GitHub Copilot \cite{github2026copilot}, usado
+como extensão do Visual Studio Code com o modelo padrão do plano gratuito para
+estudantes, sugeriu complementos de código em funções de formatação dos
+relatórios e em testes automatizados. Todas as sugestões aceitas foram
+revisadas, ajustadas pelo autor e cobertas por testes. Nenhum dado pessoal,
+nenhuma credencial e nenhum dado dos usuários da avaliação foram expostos à
+ferramenta. A declaração completa e o detalhamento das interações estão no
+\cref{ap:ia}.
+
+\begin{instrucao}
+\orientacao{Declaração de uso de inteligência artificial}
+O Art. 19 da Portaria Normativa nº 310/2026 da Ufes \cite{ufes2026portaria}
+torna obrigatória a declaração do uso de \ac{ia} em qualquer produção
+acadêmica, exceto os usos meramente acessórios definidos pela comissão de
+governança de IA da Ufes (CPGIA). Assistentes de programação, como o GitHub
+Copilot, também precisam ser declarados. Para trabalhos acadêmicos, a portaria
+pede três coisas. O modelo atende a cada uma delas em um lugar:
+\begin{enumerate}
+  \item uma declaração com ferramenta, versão, finalidade e forma de
+        contribuição, em seção ou apêndice específico (§ 1º): o
+        \cref{ap:ia}, que fica como primeiro apêndice para ser encontrado com
+        facilidade;
+  \item o detalhamento das interações, das motivações e dos métodos de uso
+        (§ 2º): também no \cref{ap:ia};
+  \item a citação da ferramenta conforme as normas de citação e a indicação,
+        na descrição dos métodos, da versão, dos parâmetros e das bases de
+        dados usadas (§ 3º): esta seção, com a ferramenta nas Referências.
+\end{enumerate}
+A portaria também proíbe atribuir autoria ou coautoria a uma ferramenta de IA
+(Art. 17) e inserir nela dados pessoais, credenciais institucionais ou dados
+confidenciais. Você continua responsável pela correção e pela originalidade
+de tudo o que entregar, inclusive do código (Art. 18). Se não usou nenhuma
+ferramenta de IA, apague esta seção e o \cref{ap:ia}. Quando o uso decorrer de
+tecnologia assistiva, a declaração pode ser apresentada ao setor de apoio à
+inclusão, e não no corpo do trabalho (§ 4º). O modelo oficial de declaração
+ainda será publicado pela CPGIA. Quando isso acontecer, ajuste o apêndice a
+ele.
+\end{instrucao}

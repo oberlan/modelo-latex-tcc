@@ -1,0 +1,212 @@
+% ==============================================================================
+% Capítulo 4: Metodologia
+% ==============================================================================
+\chapter{Metodologia}
+\label{cap:metodologia}
+
+\begin{instrucao}
+\orientacao{O que vai na Metodologia}
+Este capítulo descreve o que foi feito e como, com detalhes suficientes para
+que outra pessoa consiga reproduzir o trabalho. Em um trabalho científico de
+Computação, ele costuma ter duas partes:
+\begin{itemize}
+  \item a \textbf{abordagem proposta}: modelo, algoritmo, arquitetura ou
+        técnica desenvolvida, com as decisões de projeto justificadas;
+  \item o \textbf{planejamento dos experimentos}: dados ou instâncias,
+        métricas, ambiente computacional, parâmetros e métodos de comparação.
+\end{itemize}
+Escreva no passado e na voz passiva ou impessoal (``a heurística foi
+implementada'', ``foram usadas 270 instâncias''). Os resultados ficam para o
+capítulo seguinte. Aqui apenas se descreve como eles foram obtidos.
+
+Se o título ``Metodologia'' não combinar com o trabalho, ele pode ser trocado
+pelo nome da abordagem, como ``Heurística proposta'' ou ``Método proposto''.
+\end{instrucao}
+
+Este capítulo apresenta a heurística proposta para o \acs{mkp} e o
+planejamento dos experimentos usados para avaliá-la. A
+\cref{sec:metodologia:heuristica} descreve os componentes da heurística e a
+\cref{sec:metodologia:experimentos} apresenta as instâncias, as métricas e o
+ambiente computacional.
+
+% ------------------------------------------------------------------------------
+\section{Heurística proposta}
+\label{sec:metodologia:heuristica}
+
+A heurística segue o esquema da \acs{ils} apresentado na
+\cref{sec:fundamentacao:ils} e está descrita no \cref{alg:ils}. As subseções a
+seguir detalham cada componente.
+
+\begin{algoritmo}[htbp]
+  \caption{Heurística de \acs{ils} proposta para o \acs{mkp}}
+  \label{alg:ils}
+  \begin{algorithmic}[1]
+    \Require instância $(p, w, c)$, tempo limite $T$, parâmetros $k_{\min}$ e $k_{\max}$
+    \Ensure melhor solução encontrada $s^{\mathrm{best}}$
+    \State $s \gets \Call{Gulosa}{p, w, c}$
+    \State $s \gets \Call{BuscaLocal}{s}$
+    \State $s^{\mathrm{best}} \gets s$
+    \State $k \gets k_{\min}$
+    \While{tempo decorrido $< T$}
+      \State $s' \gets \Call{Perturba}{s, k}$ \Comment{remove $k$ itens ao acaso}
+      \State $s' \gets \Call{BuscaLocal}{s'}$
+      \If{$f(s') > f(s)$}
+        \State $s \gets s'$
+        \State $k \gets k_{\min}$
+        \If{$f(s) > f(s^{\mathrm{best}})$}
+          \State $s^{\mathrm{best}} \gets s$
+        \EndIf
+      \Else
+        \State $k \gets \min(k + 1, k_{\max})$ \Comment{intensifica a perturbação}
+      \EndIf
+    \EndWhile
+    \State \Return $s^{\mathrm{best}}$
+  \end{algorithmic}
+  \fonteautor
+\end{algoritmo}
+
+\begin{instrucao}
+\orientacao{Algoritmos em pseudocódigo}
+Algoritmos são apresentados em pseudocódigo, e não como código-fonte de uma
+linguagem específica. O modelo usa o pacote \verb|algpseudocode| dentro do
+ambiente \verb|algoritmo|, que tem lista própria e legenda acima, como as
+demais ilustrações.
+\begin{exemplocodigo}
+\begin{algoritmo}[htbp]
+  \caption{Busca linear}
+  \label{alg:busca}
+  \begin{algorithmic}[1]
+    \Require vetor $A[1..n]$, valor $x$
+    \Ensure posição de $x$ em $A$ ou $-1$
+    \For{$i \gets 1$ \textbf{até} $n$}
+      \If{$A[i] = x$}
+        \State \Return $i$
+      \EndIf
+    \EndFor
+    \State \Return $-1$
+  \end{algorithmic}
+  \fonteautor
+\end{algoritmo}
+\end{exemplocodigo}
+O número entre colchetes em \verb|algorithmic[1]| numera todas as linhas, o
+que permite citar uma linha específica no texto (``a linha 6 do
+\cref{alg:ils}''). Explique o algoritmo no texto, linha a linha ou por blocos,
+como nas subseções abaixo.
+\end{instrucao}
+
+\subsection{Solução inicial}
+\label{sec:metodologia:inicial}
+
+A solução inicial (linha 1 do \cref{alg:ils}) é construída por um procedimento
+guloso que ordena os itens pela razão de eficiência
+\begin{equation}
+  e_j = \frac{p_j}{\sum_{i=1}^{m} w_{ij} / c_i},
+  \label{eq:eficiencia}
+\end{equation}
+em que o consumo de cada recurso é ponderado pela respectiva capacidade. Os
+itens são inseridos em ordem decrescente de $e_j$, desde que a inserção não
+viole nenhuma restrição.
+
+\subsection{Busca local}
+\label{sec:metodologia:busca}
+
+A busca local explora duas vizinhanças. A primeira tenta inserir qualquer item
+fora da solução que caiba na capacidade residual. A segunda troca um item da
+solução por um item de fora, desde que a troca aumente o valor da solução e
+mantenha a viabilidade. A busca adota a estratégia de primeira melhora e
+termina quando nenhuma das duas vizinhanças produz uma solução melhor.
+
+\subsection{Perturbação adaptativa e critério de aceitação}
+\label{sec:metodologia:perturbacao}
+
+A perturbação remove $k$ itens escolhidos ao acaso da solução corrente. O valor
+de $k$ começa em $k_{\min}$ e aumenta em uma unidade a cada iteração sem
+melhora, até o limite $k_{\max}$ (linha 15). Quando uma solução melhor é
+encontrada, $k$ volta a $k_{\min}$ (linha 10). Desse modo, a busca começa com
+perturbações fracas, que exploram a vizinhança do ótimo local, e as intensifica
+apenas quando fica estagnada. O critério de aceitação é o de melhora, ou seja,
+a busca continua a partir de $s'$ somente se $s'$ for melhor que $s$.
+
+% ------------------------------------------------------------------------------
+\section{Planejamento dos experimentos}
+\label{sec:metodologia:experimentos}
+
+\subsection{Instâncias e métodos de comparação}
+
+Foram usadas as 270 instâncias de \textcite{chu1998genetic}, organizadas em
+27 grupos de dez instâncias que combinam $n \in \{100, 250, 500\}$ itens,
+$m \in \{5, 10, 30\}$ restrições e três níveis de folga das restrições. A
+heurística foi comparada ao modelo das
+\crefrange{eq:mkp:objetivo}{eq:mkp:dominio}, resolvido pelo HiGHS
+\cite{huangfu2018parallelizing}, e aos resultados do \acs{ag} de
+\textcite{chu1998genetic}.
+
+\subsection{Métricas}
+
+A qualidade de uma solução de valor $z$ foi medida pelo desvio percentual
+(\emph{gap}) em relação ao valor $z^*$ da melhor solução conhecida para a
+instância, dado pela \cref{eq:gap}.
+\begin{equation}
+  \mathit{gap} = 100 \times \frac{z^* - z}{z^*}.
+  \label{eq:gap}
+\end{equation}
+Como a heurística é aleatória, cada instância foi resolvida dez vezes com
+sementes diferentes e foram registrados o \emph{gap} médio e o melhor
+\emph{gap}. A diferença entre os métodos foi avaliada pelo teste de postos
+sinalizados de Wilcoxon, com nível de significância de 5\%.
+
+\subsection{Ambiente computacional e parâmetros}
+
+A heurística foi implementada em C++17 e compilada com o g++ 13 e a opção
+\texttt{-O3}. Os experimentos foram executados em um computador com processador
+Intel Core i7 de 12ª geração, 16 GB de memória e sistema Ubuntu 24.04. Todos
+os métodos receberam tempo limite de 60 segundos por instância. Os parâmetros
+$k_{\min} = 2$ e $k_{\max} = 10$ foram definidos em testes preliminares com 27
+instâncias, uma de cada grupo, que não foram usadas na comparação final.
+
+\begin{instrucao}
+\orientacao{Reprodutibilidade}
+Informe tudo o que influencia os resultados, como a versão das ferramentas,
+o hardware, as sementes aleatórias, os parâmetros e a forma de calibrá-los. Uma
+boa prática é publicar o código e os dados em um repositório (GitHub, GitLab
+ou Zenodo) e indicar o endereço no texto ou em nota de rodapé.
+\end{instrucao}
+
+% ------------------------------------------------------------------------------
+\section{Uso de ferramentas de inteligência artificial}
+\label{sec:metodologia:ia}
+
+Durante o trabalho, o ChatGPT \cite{openai2026chatgpt}, com o modelo GPT-5 e
+as configurações padrão da interface web, foi usado para revisar a redação de
+trechos do texto e para sugerir casos de teste para a rotina que verifica a
+viabilidade das soluções. Nenhum dado pessoal ou confidencial foi fornecido à
+ferramenta. Todo conteúdo sugerido foi conferido pelo autor antes de ser usado.
+A declaração completa e o detalhamento das interações estão no \cref{ap:ia}.
+
+\begin{instrucao}
+\orientacao{Declaração de uso de inteligência artificial}
+O Art. 19 da Portaria Normativa nº 310/2026 da Ufes \cite{ufes2026portaria}
+torna obrigatória a declaração do uso de \ac{ia} em qualquer produção
+acadêmica, exceto os usos meramente acessórios definidos pela comissão de
+governança de IA da Ufes (CPGIA). Para trabalhos acadêmicos, a portaria pede
+três coisas. O modelo atende a cada uma delas em um lugar:
+\begin{enumerate}
+  \item uma declaração com ferramenta, versão, finalidade e forma de
+        contribuição, em seção ou apêndice específico (§ 1º): o
+        \cref{ap:ia}, que fica como primeiro apêndice para ser encontrado com
+        facilidade;
+  \item o detalhamento das interações, das motivações e dos métodos de uso
+        (§ 2º): também no \cref{ap:ia};
+  \item a citação da ferramenta conforme as normas de citação e a indicação,
+        na descrição dos métodos, da versão, dos parâmetros e das bases de
+        dados usadas (§ 3º): esta seção, com a ferramenta nas Referências.
+\end{enumerate}
+A portaria também proíbe atribuir autoria ou coautoria a uma ferramenta de IA
+(Art. 17) e inserir nela dados pessoais ou confidenciais. Você continua
+responsável pela correção e pela originalidade de tudo o que entregar
+(Art. 18). Se não usou nenhuma ferramenta de IA, apague esta seção e o
+\cref{ap:ia}. Quando o uso decorrer de tecnologia assistiva, a declaração pode
+ser apresentada ao setor de apoio à inclusão, e não no corpo do trabalho
+(§ 4º). O modelo oficial de declaração ainda será publicado pela CPGIA. Quando
+isso acontecer, ajuste o apêndice a ele.
+\end{instrucao}

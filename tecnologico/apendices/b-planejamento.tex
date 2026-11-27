@@ -1,0 +1,94 @@
+% ==============================================================================
+% Apêndice B: Planejamento do projeto
+% ==============================================================================
+\chapter{Planejamento do projeto}
+\label{ap:planejamento}
+
+\begin{instrucao}
+\orientacao{Planejamento, viabilidade e riscos}
+As competências do TCC incluem desenvolver um cronograma, rastrear o progresso
+e gerenciar os riscos do projeto. Este apêndice mostra uma forma de registrar
+esses elementos. Mantenha o cronograma realizado (e não apenas o planejado) e
+comente no texto os desvios relevantes. Apêndices são material elaborado pelo
+próprio autor e devem ser citados no texto pelo menos uma vez. Material de
+outros autores vai em anexo.
+
+Pela NBR 14724:2024, se um apêndice citar obras, as referências dessas obras
+ficam no próprio apêndice, e não na lista geral de Referências.
+\end{instrucao}
+
+% ------------------------------------------------------------------------------
+\section{Cronograma}
+
+O \cref{qua:cronograma} apresenta o cronograma realizado, organizado nos seis
+ciclos de desenvolvimento descritos na \cref{sec:introducao:metodo}. A
+avaliação com usuários, prevista para o quinto ciclo, foi adiada para o sexto
+porque a implantação em homologação levou mais tempo que o planejado.
+
+\newcommand{\feito}{\cellcolor{gray!45}}
+\begin{quadro}[htbp]
+  \centering
+  \caption{Cronograma realizado por ciclo de desenvolvimento}
+  \label{qua:cronograma}
+  \small
+  \begin{tabular}{|l|c|c|c|c|c|c|}
+    \hline
+    \textbf{Atividade} & \textbf{C1} & \textbf{C2} & \textbf{C3} &
+      \textbf{C4} & \textbf{C5} & \textbf{C6} \\
+    \hline
+    Levantamento de requisitos         & \feito & \feito &        &        &        &        \\
+    \hline
+    Protótipos e validação             &        & \feito &        &        &        &        \\
+    \hline
+    Projeto da arquitetura e dos dados &        & \feito & \feito &        &        &        \\
+    \hline
+    Implementação (RF01 a RF05)        &        &        & \feito & \feito &        &        \\
+    \hline
+    Implementação (RF06 a RF08)        &        &        &        & \feito & \feito &        \\
+    \hline
+    Testes automatizados               &        &        & \feito & \feito & \feito &        \\
+    \hline
+    Implantação em homologação         &        &        &        &        & \feito &        \\
+    \hline
+    Avaliação com usuários             &        &        &        &        &        & \feito \\
+    \hline
+    Escrita do texto                   & \feito &        &        & \feito & \feito & \feito \\
+    \hline
+  \end{tabular}
+  \fonte{Elaborado pelo próprio autor. Cada ciclo teve duas semanas.}
+\end{quadro}
+
+% ------------------------------------------------------------------------------
+\section{Análise de riscos}
+
+O \cref{qua:riscos} apresenta os principais riscos identificados no início do
+projeto, com a probabilidade, o impacto e as ações previstas. O risco R3 se
+concretizou no quinto ciclo e a ação de contingência foi aplicada.
+
+\begin{quadro}[htbp]
+  \centering
+  \caption{Riscos do projeto e ações de prevenção e contingência}
+  \label{qua:riscos}
+  \small
+  \begin{tabularx}{\textwidth}{|c|>{\raggedright\arraybackslash}X|c|c|>{\raggedright\arraybackslash}X|}
+    \hline
+    \textbf{Código} & \textbf{Risco} & \textbf{Prob.} & \textbf{Impacto} &
+      \textbf{Prevenção e contingência} \\
+    \hline
+    R1 & Pouca disponibilidade dos usuários para entrevistas & Média & Alto &
+      Agendar as entrevistas no início do semestre. Usar questionário
+      \emph{on-line} se não houver agenda. \\
+    \hline
+    R2 & Estimativas otimistas de esforço & Alta & Médio &
+      Priorizar as histórias com os usuários. Adiar as de baixa prioridade. \\
+    \hline
+    R3 & Atraso na liberação do servidor de homologação & Média & Alto &
+      Solicitar o servidor no segundo ciclo. Implantar em serviço gratuito de
+      nuvem como alternativa temporária. \\
+    \hline
+    R4 & Falta de familiaridade com o arcabouço & Baixa & Médio &
+      Fazer um protótipo técnico no primeiro ciclo. \\
+    \hline
+  \end{tabularx}
+  \fonteautor
+\end{quadro}

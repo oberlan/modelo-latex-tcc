@@ -1,0 +1,98 @@
+% ==============================================================================
+% Apêndice A: Declaração de uso de inteligência artificial
+% Exigida pelo Art. 19 da Portaria Normativa nº 310/2026 da Ufes.
+% Se você não usou ferramentas de IA, apague este arquivo, a linha que o
+% inclui no arquivo principal e a Seção 6.5 da Implementação.
+% ==============================================================================
+\chapter{Declaração de uso de inteligência artificial}
+\label{ap:ia}
+
+\begin{instrucao}
+\orientacao{Por que um apêndice?}
+O Art. 19 da Portaria Normativa nº 310/2026 da Ufes \cite{ufes2026portaria}
+admite que a declaração fique em seção ou apêndice específico. O apêndice foi
+escolhido porque a NBR 14724 não prevê um elemento pré-textual para esse fim e
+porque o detalhamento das interações exigido pelo § 2º pode ser longo. Por ser
+o primeiro apêndice, ele aparece logo após as Referências e é fácil de
+localizar. Na Implementação, uma seção curta cita a ferramenta e remete a este
+apêndice.
+
+\orientacao{Como preencher}
+\begin{itemize}
+  \item No \cref{qua:ia:declaracao}, liste cada ferramenta usada, com a versão
+        ou o modelo, a finalidade e a forma de contribuição, indicando as
+        partes do trabalho afetadas.
+  \item Na seção seguinte, detalhe as interações, informando o que foi pedido,
+        por que, como o resultado foi verificado e o que foi aproveitado ou
+        descartado.
+        Não é preciso transcrever todas as conversas. Descreva os tipos de
+        interação com exemplos representativos.
+  \item Cite cada ferramenta e inclua-a no arquivo \verb|referencias.bib|
+        (veja as entradas \verb|openai2026chatgpt| e \verb|github2026copilot|).
+  \item A declaração é escrita na primeira pessoa do singular (``Declaro
+        que\ldots''), por ser um compromisso pessoal do autor. O detalhamento
+        das interações volta à terceira pessoa, como o restante do trabalho.
+  \item Seja específico e honesto. Usos ``meramente acessórios'', que a
+        portaria dispensa de declaração, serão definidos pela CPGIA. Na dúvida,
+        declare.
+\end{itemize}
+Substitua o texto de exemplo abaixo pelas ferramentas, versões e usos reais
+do seu trabalho. Quando a CPGIA publicar o modelo oficial de declaração,
+adapte este apêndice a ele.
+\end{instrucao}
+
+% ------------------------------------------------------------------------------
+\section{Declaração}
+
+Declaro, em cumprimento ao Art. 19 da Portaria Normativa nº 310/2026 da
+\imprimiruniversidade{} \cite{ufes2026portaria}, que utilizei ferramentas de
+\acl{ia} na elaboração deste trabalho, nos termos descritos no
+\cref{qua:ia:declaracao}. Declaro também que revisei todo o conteúdo gerado
+com o auxílio dessas ferramentas, que assumo integral responsabilidade pela
+precisão e pela originalidade do texto, do código e dos resultados
+apresentados e que nenhuma ferramenta foi tratada como autora ou coautora do
+trabalho.
+
+\begin{quadro}[htbp]
+  \centering
+  \caption{Ferramentas de \acs{ia} utilizadas no trabalho}
+  \label{qua:ia:declaracao}
+  \small
+  \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{2.6cm}|}
+    \hline
+    \textbf{Ferramenta e versão} & \textbf{Finalidade} &
+      \textbf{Forma de contribuição} & \textbf{Partes afetadas} \\
+    \hline
+    GitHub Copilot, extensão do Visual Studio Code, modelo padrão do plano
+      para estudantes \cite{github2026copilot} &
+      Apoio à programação &
+      Sugestões de complemento de código em funções de formatação de
+      relatórios e em testes, revisadas e ajustadas pelo autor &
+      Módulo \texttt{relatorios} e testes automatizados
+      (\cref{sec:implementacao:organizacao,sec:testes:automatizados}) \\
+    \hline
+  \end{tabularx}
+  \fonteautor
+\end{quadro}
+
+% ------------------------------------------------------------------------------
+\section{Detalhamento das interações}
+
+\textbf{Complemento de código.} A extensão ficou ativa no editor durante a
+implementação do módulo \texttt{relatorios} e dos testes automatizados. Ela
+sugeria complementos de linhas e de funções a partir do código já escrito e
+dos comentários. A motivação foi reduzir o tempo gasto com código repetitivo,
+como a formatação de datas e a montagem de tabelas dos relatórios. As
+sugestões foram aceitas apenas quando o autor entendia o código proposto.
+Todas foram revisadas, várias foram modificadas e nenhuma foi incorporada sem
+teste automatizado correspondente.
+
+\textbf{O que não foi feito com a ferramenta.} A especificação de requisitos,
+o projeto da arquitetura, o modelo de dados, a regra de tratamento de
+conflitos de reserva (\cref{cod:conflito}) e o texto deste trabalho foram
+elaborados sem o uso de ferramentas de \acs{ia}.
+
+\textbf{Configuração.} A extensão foi usada com as configurações padrão,
+entre agosto e outubro de 2026, com a opção de compartilhamento de trechos de
+código para treinamento desativada. Nenhum dado pessoal, credencial ou dado
+dos participantes da avaliação foi fornecido à ferramenta.

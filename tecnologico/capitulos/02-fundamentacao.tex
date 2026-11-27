@@ -1,0 +1,223 @@
+% ==============================================================================
+% Capítulo 2: Fundamentação teórica e tecnologias
+% ==============================================================================
+\chapter{Fundamentação teórica e tecnologias}
+\label{cap:fundamentacao}
+
+\begin{instrucao}
+\orientacao{O que vai na Fundamentação}
+Em um trabalho tecnológico, este capítulo reúne dois tipos de conteúdo:
+\begin{itemize}
+  \item os \textbf{conceitos} necessários para entender o desenvolvimento
+        (processos, técnicas de requisitos, padrões de arquitetura, critérios
+        de qualidade e de usabilidade), com citações de livros e artigos;
+  \item as \textbf{tecnologias} usadas (linguagens, arcabouços, bancos de
+        dados, serviços), com uma descrição curta e a justificativa da escolha.
+\end{itemize}
+Não transforme o capítulo em tutorial. A banca não precisa saber instalar o
+Django, mas precisa entender por que ele foi escolhido e que papel cumpre no
+sistema. Inclua apenas o que será usado nos capítulos seguintes. Como
+referência, de oito a doze páginas costumam ser suficientes.
+
+Escreva com suas palavras e cite as fontes. Copiar texto sem citar é plágio e,
+pelas regras do TCC, leva à reprovação com nota zero. Documentação oficial de
+tecnologias pode ser citada como página web (veja a entrada
+\verb|django2026documentation| em \verb|referencias.bib|).
+\end{instrucao}
+
+Este capítulo apresenta os conceitos e as tecnologias que fundamentam o
+desenvolvimento do sistema. A \cref{sec:fundamentacao:requisitos} trata da
+especificação de requisitos com histórias de usuário. A
+\cref{sec:fundamentacao:arquitetura} apresenta o padrão de arquitetura
+adotado, a \cref{sec:fundamentacao:usabilidade} discute a avaliação de
+usabilidade e a \cref{sec:fundamentacao:tecnologias} descreve as tecnologias
+utilizadas.
+
+% ------------------------------------------------------------------------------
+\section{Requisitos e histórias de usuário}
+\label{sec:fundamentacao:requisitos}
+
+Requisitos descrevem o que um sistema deve fazer e as restrições sob as quais
+deve operar \cite{sommerville2018engenharia}. Eles costumam ser divididos em
+\acp{rf}, que descrevem serviços e comportamentos do sistema, e \acp{rnf}, que
+tratam de propriedades como desempenho, segurança, usabilidade e
+manutenibilidade \cite{sommerville2018engenharia}.
+
+Em processos ágeis, os requisitos funcionais são frequentemente registrados
+como histórias de usuário, frases curtas escritas do ponto de vista de quem
+usará o sistema, no formato ``como \emph{papel}, quero \emph{ação} para
+\emph{benefício}'' \cite{cohn2004user}. Cada história é acompanhada de
+critérios de aceitação, que definem quando ela está concluída.
+\textcite{cohn2004user} recomenda que boas histórias sejam independentes,
+negociáveis, valiosas para o usuário, estimáveis, pequenas e testáveis.
+
+\begin{instrucao}
+\orientacao{Citação direta}
+A citação direta reproduz literalmente o texto da fonte e sempre informa a
+página. Com até três linhas, fica no próprio parágrafo, entre aspas duplas.
+\begin{exemplo}
+A portaria define alucinação como
+``informação aparentemente plausível,
+porém incorreta, imprecisa ou
+inventada'' \cite[p.~1]{ufes2026portaria}.
+\end{exemplo}
+Com mais de três linhas, use o ambiente \verb|citacao|, que aplica recuo de
+4~cm, fonte menor e espaçamento simples, sem aspas.
+\begin{exemplo}
+\begin{citacao}
+O usuário é responsável pela precisão,
+pela originalidade e pela adequação dos
+conteúdos gerados ou modificados por
+sistema de inteligência artificial que
+utilizar, devendo verificá-los antes de
+sua utilização, considerada a
+possibilidade de alucinação
+\cite[p.~5]{ufes2026portaria}.
+\end{citacao}
+\end{exemplo}
+Use citações diretas com moderação. Em uma Fundamentação bem escrita, a maior
+parte das citações é indireta (paráfrase com indicação da fonte).
+\end{instrucao}
+
+% ------------------------------------------------------------------------------
+\section{Arquitetura de software e o padrão MTV}
+\label{sec:fundamentacao:arquitetura}
+
+A arquitetura de um sistema é o conjunto de estruturas necessárias para
+raciocinar sobre ele, formado pelos elementos de software, pelas relações
+entre eles e pelas propriedades de ambos \cite{bass2021software}. Em
+aplicações web, um padrão recorrente é separar a lógica de dados, a lógica de
+apresentação e o tratamento das requisições.
+
+O arcabouço Django organiza as aplicações segundo o padrão \ac{mtv}
+\cite{django2026documentation}. O modelo define a estrutura dos dados e as
+regras de negócio associadas a eles e é mapeado para tabelas do banco de dados
+por meio de um \ac{orm}. A visão recebe a requisição, consulta os modelos e
+escolhe a resposta. O \emph{template} define como os dados são apresentados
+ao usuário. A \cref{fig:mtv} mostra o caminho de uma requisição nesse padrão.
+
+\begin{figure}[htbp]
+  \centering
+  \caption{Fluxo de uma requisição no padrão \acs{mtv} do Django}
+  \label{fig:mtv}
+  \begin{tikzpicture}[
+      node distance=8mm and 14mm,
+      caixa/.style={draw, rounded corners=2pt, minimum width=2.6cm,
+                    minimum height=9mm, align=center, font=\footnotesize},
+      seta/.style={-{Stealth}, thick},
+    ]
+    \node[caixa] (nav) {Navegador};
+    \node[caixa, right=of nav] (url) {Roteador de URLs\\(\texttt{urls.py})};
+    \node[caixa, right=of url] (visao) {Visão\\(\texttt{views.py})};
+    \node[caixa, below=of visao] (modelo) {Modelo\\(\texttt{models.py})};
+    \node[caixa, below=of modelo, fill=gray!10] (bd) {Banco de dados};
+    \node[caixa, below=of url] (tpl) {\emph{Template}\\(HTML)};
+    \draw[seta] (nav) -- node[above, font=\scriptsize] {requisição} (url);
+    \draw[seta] (url) -- (visao);
+    \draw[seta] (visao) -- (modelo);
+    \draw[seta] (modelo) -- node[right, font=\scriptsize] {\acs{orm}} (bd);
+    \draw[seta] (visao) -- (tpl);
+    \draw[seta] (tpl.west) -| node[below, pos=0.25, font=\scriptsize] {resposta} (nav.south);
+  \end{tikzpicture}
+  \fonte{Elaborado pelo próprio autor com base em \textcite{django2026documentation}.}
+\end{figure}
+
+\begin{instrucao}
+\orientacao{Figuras: inclusão, citação e qualidade}
+Pela NBR 14724, a identificação da figura (a palavra ``Figura'', o número e
+o título) fica \textbf{acima} dela e a fonte fica \textbf{abaixo}, mesmo
+quando a figura foi feita por você. Por isso, no LaTeX, o \verb|\caption| vem
+antes do conteúdo e o \verb|\fonte| depois. Para material próprio, use
+\verb|\fonteautor|. Para figura baseada em outra obra, escreva, por exemplo,
+\verb|\fonte{Adaptado de \textcite{chave}.}|.
+\begin{exemplocodigo}
+\begin{figure}[htbp]
+  \centering
+  \caption{Tela de reserva de horários}
+  \label{fig:tela-reserva}
+  \includegraphics[width=0.9\textwidth]{figuras/tecnologico/tela-reserva.png}
+  \fonteautor
+\end{figure}
+\end{exemplocodigo}
+
+\textbf{Toda figura, tabela, quadro ou código incluído no trabalho deve ser
+citado no texto pelo menos uma vez}, de preferência antes de aparecer. Ao
+citar, escreva o nome com inicial maiúscula seguido do número, como em ``a
+Figura 3 mostra'', e não ``a figura 3''. O mesmo vale para Tabela, Quadro,
+Código, Equação e Seção. Os comandos \verb|\cref| e \verb|\Cref| já escrevem o
+nome dessa forma. Não basta citar. Explique no texto o que deve ser observado. Diagramas de
+arquitetura, de classes e de sequência pedem explicação no texto, elemento por
+elemento ou pelo menos das partes principais.
+
+\textbf{Como obter figuras de boa qualidade}
+\begin{itemize}
+  \item Prefira figuras \textbf{vetoriais} (PDF, EPS ou desenhadas em TikZ),
+        que não perdem nitidez com o zoom nem na impressão. Esta figura foi
+        desenhada em TikZ diretamente no texto.
+  \item Diagramas UML feitos no draw.io (diagrams.net), no PlantUML, no Astah
+        ou em ferramentas semelhantes devem ser exportados em PDF ou SVG
+        (convertido para PDF), nunca capturados com \emph{print screen}.
+  \item Capturas de tela do sistema devem ser salvas em PNG, na resolução
+        original e com o zoom do navegador em 100\%. Recorte apenas a área de
+        interesse e evite JPEG, porque a compressão borra textos e linhas.
+  \item Ajuste apenas a largura (\verb|width=|). Alterar largura e altura ao
+        mesmo tempo distorce a imagem.
+  \item O texto dentro da figura deve ter tamanho próximo ao das legendas.
+        Se for preciso dar zoom para ler, a figura precisa ser refeita ou
+        dividida.
+  \item Use cores que continuem distinguíveis em escala de cinza e para
+        pessoas com daltonismo.
+  \item Mantenha o mesmo estilo e o mesmo alinhamento (centralizado) em todas
+        as figuras do trabalho, como pede a NBR 14724:2024.
+\end{itemize}
+\end{instrucao}
+
+% ------------------------------------------------------------------------------
+\section{Usabilidade e a escala SUS}
+\label{sec:fundamentacao:usabilidade}
+
+A usabilidade é a medida em que um sistema pode ser usado por usuários
+específicos para atingir objetivos com eficácia, eficiência e satisfação em um
+contexto de uso \cite{iso2018usability}. Um dos instrumentos mais usados para medir a satisfação é a
+\ac{sus}, um questionário de dez afirmações respondidas em escala de cinco
+pontos que resulta em uma pontuação de 0 a 100 \cite{brooke1996sus}.
+\textcite{bangor2009determining} associaram faixas dessa pontuação a adjetivos,
+o que facilita a interpretação. Pontuações em torno de 71 correspondem ao
+adjetivo ``bom''. Pontuações em torno de 86 correspondem a ``excelente''.
+
+% ------------------------------------------------------------------------------
+\section{Tecnologias utilizadas}
+\label{sec:fundamentacao:tecnologias}
+
+O \cref{qua:tecnologias} resume as tecnologias usadas no desenvolvimento, com
+a versão e o papel de cada uma. A escolha do Django se deveu à experiência
+prévia do autor com Python, ao sistema de autenticação e de administração já
+incluídos no arcabouço e à documentação extensa
+\cite{django2026documentation}. O PostgreSQL foi escolhido por ser o banco de
+dados já mantido pela equipe de tecnologia do centro, o que facilita a
+implantação.
+
+\begin{quadro}[htbp]
+  \centering
+  \caption{Tecnologias utilizadas no desenvolvimento}
+  \label{qua:tecnologias}
+  \small
+  \begin{tabularx}{\textwidth}{|l|c|X|}
+    \hline
+    \textbf{Tecnologia} & \textbf{Versão} & \textbf{Papel no sistema} \\
+    \hline
+    Python & 3.12 & Linguagem de programação do servidor \\
+    \hline
+    Django & 5.2 & Arcabouço web (rotas, visões, \acs{orm}, autenticação) \\
+    \hline
+    PostgreSQL & 16 & Banco de dados relacional \\
+    \hline
+    Bootstrap & 5.3 & Componentes de interface e leiaute responsivo \\
+    \hline
+    pytest & 8.3 & Execução dos testes automatizados \\
+    \hline
+    Docker & 27 & Empacotamento e implantação em contêineres \\
+    \hline
+  \end{tabularx}
+  \fonteautor
+\end{quadro}

@@ -1,0 +1,159 @@
+% ==============================================================================
+% Capítulo 5: Projeto do sistema
+% ==============================================================================
+\chapter{Projeto do sistema}
+\label{cap:projeto}
+
+\begin{instrucao}
+\orientacao{O que vai no Projeto do Sistema}
+Este capítulo mostra como o sistema foi organizado para atender aos
+requisitos. As competências do TCC pedem a definição de uma arquitetura
+adequada, modelos de estrutura e de comportamento e a análise do projeto sob a
+perspectiva de atributos de qualidade. Inclua:
+\begin{itemize}
+  \item a \textbf{arquitetura}: componentes, camadas, serviços externos e como
+        se comunicam;
+  \item o \textbf{modelo estrutural}: diagrama de classes ou modelo de dados;
+  \item o \textbf{modelo comportamental}: diagramas de sequência, de atividades
+        ou de estados para os fluxos mais importantes;
+  \item as \textbf{decisões de projeto}: alternativas consideradas e por que a
+        escolhida foi adotada, relacionando-as aos requisitos.
+\end{itemize}
+Não inclua diagramas sem explicação. Cada diagrama deve ser apresentado no
+texto, que destaca o que ele mostra de relevante. Diagramas grandes demais
+para uma página devem ser divididos ou ir para um apêndice.
+\end{instrucao}
+
+Este capítulo apresenta o projeto do Monitora. A
+\cref{sec:projeto:arquitetura} descreve a arquitetura, a
+\cref{sec:projeto:modelo} apresenta o modelo de classes e a
+\cref{sec:projeto:decisoes} discute as principais decisões de projeto.
+
+% ------------------------------------------------------------------------------
+\section{Arquitetura}
+\label{sec:projeto:arquitetura}
+
+O sistema segue uma arquitetura em camadas, apresentada na
+\cref{fig:arquitetura}. O servidor web Nginx recebe as requisições e as
+encaminha à aplicação Django, executada pelo servidor de aplicação Gunicorn. A
+aplicação está dividida em três módulos, que correspondem aos perfis de
+usuário e aos grupos de requisitos. O módulo \texttt{contas} trata da
+autenticação e dos perfis, o módulo \texttt{agenda} trata dos horários e das
+reservas (RF01 a RF05) e o módulo \texttt{relatorios} gera os relatórios dos
+professores (RF07). Os lembretes (RF08) são enviados por uma tarefa agendada,
+executada fora do ciclo das requisições para não atrasar as respostas.
+
+\begin{figure}[htbp]
+  \centering
+  \caption{Arquitetura do Monitora}
+  \label{fig:arquitetura}
+  \begin{tikzpicture}[
+      font=\footnotesize,
+      comp/.style={draw, rounded corners=2pt, minimum height=8mm,
+                   minimum width=2.6cm, align=center, fill=white},
+      seta/.style={-{Stealth}, thick},
+    ]
+    \node[comp] (nav) {Navegador};
+    \node[comp, below=7mm of nav] (nginx) {Nginx};
+    \node[comp, below=7mm of nginx] (gunicorn) {Gunicorn};
+    \node[comp, below=10mm of gunicorn, xshift=-3.2cm] (contas) {\texttt{contas}};
+    \node[comp, below=10mm of gunicorn] (agenda) {\texttt{agenda}};
+    \node[comp, below=10mm of gunicorn, xshift=3.2cm] (relat) {\texttt{relatorios}};
+    \node[comp, below=12mm of agenda, fill=gray!10] (bd) {PostgreSQL};
+    \node[comp, right=12mm of relat] (tarefa) {Tarefa agendada\\(lembretes)};
+    \begin{scope}[on background layer]
+      \node[draw, dashed, rounded corners=3pt, fill=gray!5, inner sep=3mm,
+            fit=(contas)(agenda)(relat),
+            label={[anchor=north west, font=\scriptsize]north west:Aplicação Django}] (django) {};
+      \node[draw, dotted, rounded corners=3pt, inner sep=4mm,
+            fit=(nginx)(django)(bd)(tarefa),
+            label={[anchor=south east, font=\scriptsize]south east:Contêineres Docker}] {};
+    \end{scope}
+    \draw[seta] (nav) -- node[right, font=\scriptsize] {HTTPS} (nginx);
+    \draw[seta] (nginx) -- (gunicorn);
+    \draw[seta] (gunicorn) -- (django.north);
+    \draw[seta] (contas) |- (bd);
+    \draw[seta] (agenda) -- (bd);
+    \draw[seta] (relat) |- (bd);
+    \draw[seta] (tarefa.south) |- ([yshift=-2.5mm]bd.east);
+    \draw[seta] (tarefa.east) -- ++(9mm,0) node[right, align=left, font=\scriptsize] {servidor\\de e-mail};
+  \end{tikzpicture}
+  \fonteautor
+\end{figure}
+
+% ------------------------------------------------------------------------------
+\section{Modelo de classes}
+\label{sec:projeto:modelo}
+
+A \cref{fig:classes} apresenta o diagrama de classes de domínio, em notação
+\ac{uml}, com os atributos principais. Uma \texttt{Disciplina} tem vários
+monitores e cada \texttt{Monitor} publica \texttt{Horarios} semanais. Cada
+ocorrência de um horário em uma data específica pode receber no máximo uma
+\texttt{Reserva}, feita por um \texttt{Estudante}. Quando o atendimento
+acontece, o monitor registra o assunto e a presença na própria reserva, o que
+evita uma entidade adicional e simplifica os relatórios. As classes
+\texttt{Monitor}, \texttt{Estudante} e \texttt{Professor} são perfis de um
+mesmo usuário do sistema de autenticação do Django, o que permite que um
+monitor também reserve atendimentos em outra disciplina.
+
+\begin{figure}[htbp]
+  \centering
+  \caption{Diagrama de classes de domínio do Monitora}
+  \label{fig:classes}
+  \begin{tikzpicture}[
+      font=\scriptsize,
+      classe/.style={draw, rectangle split, rectangle split parts=2,
+                     rectangle split part fill={gray!15,white},
+                     text width=3.3cm, align=left, inner sep=3pt},
+      assoc/.style={thick},
+    ]
+    \node[classe] (disc) {\centering\textbf{Disciplina}
+      \nodepart{second} codigo: str\\ nome: str\\ semestre: str};
+    \node[classe, right=2.2cm of disc] (mon) {\centering\textbf{Monitor}
+      \nodepart{second} usuario: Usuario\\ disciplina: Disciplina};
+    \node[classe, below=1.6cm of mon] (hor) {\centering\textbf{Horario}
+      \nodepart{second} dia\_semana: int\\ inicio: time\\ fim: time};
+    \node[classe, below=1.6cm of hor] (res) {\centering\textbf{Reserva}
+      \nodepart{second} data: date\\ assunto: str\\ presente: bool};
+    \node[classe, left=2.2cm of res] (est) {\centering\textbf{Estudante}
+      \nodepart{second} usuario: Usuario\\ matricula: str};
+    \node[classe, below=1.6cm of disc] (prof) {\centering\textbf{Professor}
+      \nodepart{second} usuario: Usuario\\ siape: str};
+    \draw[assoc] (disc) -- node[above, pos=0.15] {1} node[above, pos=0.85] {1..*} (mon);
+    \draw[assoc] (prof) -- node[left, pos=0.2] {1..*} node[left, pos=0.8] {1..*} (disc);
+    \draw[assoc] (mon) -- node[right, pos=0.2] {1} node[right, pos=0.8] {0..*} (hor);
+    \draw[assoc] (hor) -- node[right, pos=0.2] {1} node[right, pos=0.8] {0..*} (res);
+    \draw[assoc] (est) -- node[above, pos=0.15] {1} node[above, pos=0.85] {0..*} (res);
+  \end{tikzpicture}
+  \fonteautor
+\end{figure}
+
+% ------------------------------------------------------------------------------
+\section{Decisões de projeto e atributos de qualidade}
+\label{sec:projeto:decisoes}
+
+A decisão mais importante do projeto foi como garantir que um horário não seja
+reservado por dois estudantes ao mesmo tempo (RF03). A primeira alternativa
+considerada foi verificar a disponibilidade na visão antes de gravar a
+reserva. Essa verificação, porém, não impede que duas requisições simultâneas
+passem pela checagem antes de qualquer uma gravar. Por isso, adotou-se uma
+restrição de unicidade no banco de dados sobre o par (horário, data), de modo
+que a segunda gravação falhe e a aplicação informe ao estudante que o horário
+acabou de ser ocupado. O \cref{cod:conflito}, no \cref{cap:implementacao},
+mostra a implementação dessa regra.
+
+Do ponto de vista dos atributos de qualidade, a separação em módulos favorece
+a manutenibilidade (RNF05), porque cada módulo pode ser testado de forma
+isolada. A execução dos lembretes em tarefa separada contribui para o
+desempenho (RNF03). O uso do sistema de autenticação e de permissões do
+próprio Django reduz o risco de falhas de segurança em código escrito do zero
+(RNF04).
+
+\begin{instrucao}
+\orientacao{Decisões de projeto}
+Bancas valorizam o raciocínio por trás das escolhas. Para cada decisão
+relevante, apresente o problema, as alternativas consideradas, a escolhida e o
+motivo, relacionando-a aos requisitos e aos atributos de qualidade. Diagramas
+de sequência ajudam a explicar fluxos com várias etapas, como o de reserva
+descrito acima. Se o diagrama ficar grande, mostre apenas o fluxo principal.
+\end{instrucao}

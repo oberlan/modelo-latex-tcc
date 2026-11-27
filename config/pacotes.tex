@@ -1,0 +1,95 @@
+% ==============================================================================
+% config/pacotes.tex
+% Pacotes usados pelo modelo. Em geral, não é preciso alterar este arquivo.
+% Se precisar de um pacote novo, acrescente-o ao final, na área indicada.
+% ==============================================================================
+
+% ------------------------------------------------------------------------------
+% Fontes
+% ------------------------------------------------------------------------------
+% O modelo compila com pdfLaTeX (padrão), XeLaTeX ou LuaLaTeX. O pacote iftex
+% identifica o compilador e carrega apenas o que cada um precisa.
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}   % Latin Modern Mono para códigos (texto e títulos usam Libertine)
+\fi
+
+% Linux Libertine (texto) e Linux Biolinum (sem serifa). A opção mono=false
+% mantém a fonte monoespaçada padrão, mais legível em listagens de código.
+\usepackage[mono=false]{libertine}
+
+% Matemática com o mesmo desenho da Libertine. O libertinust1math já define os
+% símbolos do amssymb, por isso este último não deve ser carregado.
+\usepackage{amsmath}
+\usepackage{libertinust1math}
+
+% Vírgula decimal em modo matemático sem espaço extra: $3,14$.
+\usepackage{icomma}
+
+% Ajustes finos de justificação e hifenização.
+\usepackage{microtype}
+
+% Recuo também no primeiro parágrafo de cada seção.
+\usepackage{indentfirst}
+
+% ------------------------------------------------------------------------------
+% Cores, figuras e gráficos
+% ------------------------------------------------------------------------------
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{positioning,arrows.meta,shapes.multipart,shapes.geometric,fit,calc,backgrounds}
+
+% ------------------------------------------------------------------------------
+% Tabelas
+% ------------------------------------------------------------------------------
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{longtable}
+
+% ------------------------------------------------------------------------------
+% Códigos e algoritmos
+% ------------------------------------------------------------------------------
+\usepackage{listings}
+\usepackage{algpseudocode}
+
+% ------------------------------------------------------------------------------
+% Caixas de orientação e exemplos (podem ser desligadas no arquivo principal)
+% ------------------------------------------------------------------------------
+\usepackage{comment}
+\usepackage[most]{tcolorbox}
+
+% ------------------------------------------------------------------------------
+% Citações e referências (ABNT NBR 10520:2023 e NBR 6023)
+% ------------------------------------------------------------------------------
+% Requer biblatex-abnt 4.0 ou mais recente (TeX Live 2024 em diante) e o Biber
+% como processador de bibliografia.
+\usepackage[autostyle]{csquotes}
+\usepackage[style=abnt, backend=biber]{biblatex}
+
+% ------------------------------------------------------------------------------
+% Referências cruzadas e siglas
+% ------------------------------------------------------------------------------
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{acro}
+
+% ------------------------------------------------------------------------------
+% Notas de revisão entre aluno e orientador
+% ------------------------------------------------------------------------------
+\ifmostrarnotas
+  \usepackage[colorinlistoftodos,textsize=footnotesize]{todonotes}
+\else
+  \usepackage[disable]{todonotes}
+\fi
+
+\usepackage{xspace}
+
+% ------------------------------------------------------------------------------
+% Pacotes adicionais do aluno
+% ------------------------------------------------------------------------------
+% \usepackage{...}

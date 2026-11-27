@@ -1,0 +1,45 @@
+% ==============================================================================
+% Resumo na língua vernácula (obrigatório, NBR 14724:2024 e NBR 6028:2021)
+% ==============================================================================
+\begin{resumo}
+\begin{instrucao}
+\orientacao{Resumo}
+O resumo apresenta, de forma concisa, o objetivo, o método, os resultados e as
+conclusões do trabalho. Escreva-o por último, quando o texto estiver pronto.
+Siga a NBR 6028:2021:
+\begin{itemize}
+  \item parágrafo único, com 150 a 500 palavras;
+  \item frases afirmativas, com o verbo na terceira pessoa, como recomenda o
+        item 4.1.4 da norma (``Este trabalho propõe\ldots'', ``Os resultados
+        mostram\ldots''). A voz ativa deixou de ser exigida, mas costuma
+        deixar o resumo mais direto;
+  \item sem citações, fórmulas, siglas não explicadas, figuras ou tabelas;
+  \item palavras-chave logo abaixo, separadas por ponto e vírgula e finalizadas
+        por ponto. Prefira termos que um leitor usaria para encontrar o
+        trabalho num catálogo (de três a cinco é a prática mais comum).
+\end{itemize}
+Um roteiro que funciona bem dedica uma ou duas frases ao contexto e ao
+problema, outras ao objetivo e ao método e as últimas aos principais
+resultados (com números) e à conclusão.
+\end{instrucao}
+
+O problema da mochila multidimensional consiste em selecionar um subconjunto de
+itens de maior valor total sem violar a capacidade de vários recursos ao mesmo
+tempo. Ele modela decisões como a alocação de orçamento entre projetos e a
+seleção de tarefas em servidores com limites de processamento e memória. Por
+ser NP-difícil, instâncias grandes não costumam ser resolvidas na otimalidade
+em tempo razoável por solucionadores de programação linear inteira. Este
+trabalho propõe uma heurística de busca local iterada que combina uma solução
+inicial gulosa, baseada em uma razão de eficiência ponderada pelas restrições,
+com uma busca local de trocas e uma perturbação adaptativa. A heurística foi
+implementada em C++ e comparada ao solucionador HiGHS e a um algoritmo
+genético da literatura em 270 instâncias da OR-Library, com tempo limite de 60
+segundos por instância. A heurística obteve desvio médio de 0,41\% em relação
+às melhores soluções conhecidas, contra 1,87\% do solucionador no mesmo tempo, e
+foi superior ao algoritmo genético em 82\% das instâncias. Os resultados
+indicam que a perturbação adaptativa é o componente que mais contribui para o
+desempenho, sobretudo nas instâncias com 500 itens.
+
+\palavraschave{mochila multidimensional; busca local iterada; heurística;
+otimização combinatória}
+\end{resumo}

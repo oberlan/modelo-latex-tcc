@@ -1,0 +1,83 @@
+% ==============================================================================
+% Apêndice B: Resultados detalhados
+% ==============================================================================
+\chapter{Resultados detalhados por grupo de instâncias}
+\label{ap:resultados}
+
+\begin{instrucao}
+\orientacao{Apêndices e tabelas longas}
+Apêndices reúnem material elaborado pelo próprio autor que complementa o texto,
+mas que atrapalharia a leitura se ficasse no corpo do trabalho, como
+resultados completos, questionários, documentos de requisitos e manuais. Cada apêndice
+deve ser citado no texto pelo menos uma vez. Material de outros autores vai em
+anexo, e não em apêndice.
+
+Pela NBR 14724:2024, se um apêndice citar obras, as referências dessas obras
+ficam no próprio apêndice, e não na lista geral de Referências.
+
+Tabelas que ocupam mais de uma página usam o ambiente \verb|longtable|. O
+cabeçalho é repetido no início de cada página, com as indicações
+``continua'' e ``continuação'' recomendadas pelo IBGE, como mostra a
+\cref{tab:resultados:detalhados}.
+\end{instrucao}
+
+A \cref{tab:resultados:detalhados} apresenta o \emph{gap} médio de cada
+método em cada um dos 27 grupos de instâncias de \textcite{chu1998genetic},
+identificados pelo número de itens ($n$), pelo número de restrições ($m$) e
+pelo fator de folga das restrições ($\alpha$).
+
+{\small
+\begin{longtable}{@{}rrrrrrr@{}}
+  \caption{\emph{Gap} médio (\%) por grupo de instâncias}
+  \label{tab:resultados:detalhados} \\
+  \toprule
+  & & & & & \multicolumn{2}{c}{\acs{ils} proposta} \\
+  \cmidrule(l){6-7}
+  $n$ & $m$ & $\alpha$ & HiGHS & \acs{ag} & Média & Melhor \\
+  \midrule
+  \endfirsthead
+  \multicolumn{7}{r}{\footnotesize(continuação)} \\
+  \toprule
+  & & & & & \multicolumn{2}{c}{\acs{ils} proposta} \\
+  \cmidrule(l){6-7}
+  $n$ & $m$ & $\alpha$ & HiGHS & \acs{ag} & Média & Melhor \\
+  \midrule
+  \endhead
+  \midrule
+  \multicolumn{7}{r}{\footnotesize(continua)} \\
+  \endfoot
+  \bottomrule
+  \endlastfoot
+    100 & 5 & 0,25 & 0,10 & 0,39 & 0,16 & 0,08 \\
+    100 & 5 & 0,50 & 0,06 & 0,27 & 0,11 & 0,05 \\
+    100 & 5 & 0,75 & 0,02 & 0,10 & 0,04 & 0,02 \\
+    100 & 10 & 0,25 & 0,17 & 0,81 & 0,37 & 0,13 \\
+    100 & 10 & 0,50 & 0,14 & 0,58 & 0,26 & 0,12 \\
+    100 & 10 & 0,75 & 0,10 & 0,48 & 0,23 & 0,09 \\
+    100 & 30 & 0,25 & 0,28 & 1,26 & 0,57 & 0,21 \\
+    100 & 30 & 0,50 & 0,27 & 0,88 & 0,48 & 0,22 \\
+    100 & 30 & 0,75 & 0,21 & 0,81 & 0,30 & 0,16 \\
+    \midrule
+    250 & 5 & 0,25 & 0,96 & 0,28 & 0,24 & 0,12 \\
+    250 & 5 & 0,50 & 0,64 & 0,22 & 0,16 & 0,08 \\
+    250 & 5 & 0,75 & 0,21 & 0,08 & 0,06 & 0,03 \\
+    250 & 10 & 0,25 & 1,83 & 0,60 & 0,51 & 0,30 \\
+    250 & 10 & 0,50 & 1,50 & 0,61 & 0,44 & 0,24 \\
+    250 & 10 & 0,75 & 1,12 & 0,41 & 0,27 & 0,14 \\
+    250 & 30 & 0,25 & 2,40 & 0,83 & 0,72 & 0,37 \\
+    250 & 30 & 0,50 & 2,39 & 0,82 & 0,58 & 0,37 \\
+    250 & 30 & 0,75 & 2,27 & 0,74 & 0,53 & 0,24 \\
+    \midrule
+    500 & 5 & 0,25 & 2,43 & 0,45 & 0,37 & 0,17 \\
+    500 & 5 & 0,50 & 1,55 & 0,29 & 0,24 & 0,13 \\
+    500 & 5 & 0,75 & 0,66 & 0,10 & 0,08 & 0,05 \\
+    500 & 10 & 0,25 & 5,23 & 0,87 & 0,79 & 0,42 \\
+    500 & 10 & 0,50 & 3,79 & 0,63 & 0,57 & 0,40 \\
+    500 & 10 & 0,75 & 2,83 & 0,53 & 0,46 & 0,23 \\
+    500 & 30 & 0,25 & 7,06 & 1,25 & 0,92 & 0,57 \\
+    500 & 30 & 0,50 & 7,22 & 1,26 & 0,95 & 0,54 \\
+    500 & 30 & 0,75 & 5,05 & 1,01 & 0,66 & 0,46 \\
+\end{longtable}
+}
+\fonte{Elaborado pelo próprio autor. Os valores do \acs{ag} foram obtidos de
+  \textcite{chu1998genetic}.}

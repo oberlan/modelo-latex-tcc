@@ -1,0 +1,40 @@
+% ==============================================================================
+% Dados do trabalho
+% Preencha os campos abaixo. Eles alimentam a capa, a folha de rosto, a folha
+% de aprovação e as informações do PDF.
+% ==============================================================================
+
+% Curso: cc (Ciência da Computação) ou ec (Engenharia de Computação).
+% Este exemplo usa ec apenas para mostrar a opção.
+\curso{ec}
+
+% Título e subtítulo (deixe \subtitulo{} vazio se não houver).
+\titulo{Monitora}
+\subtitulo{um sistema web para agendamento de monitorias acadêmicas}
+
+\autor{Nome Completo do Autor}
+\data{2026}
+
+% Orientador e coorientador, com titulação. Para orientadora, use
+% \orientador[Orientadora:]{Profa. Dra. Nome}. Sem coorientador, apague a linha.
+\orientador{Prof. Dr. Nome do Orientador}
+% \coorientador{Prof. Me. Nome do Coorientador}
+
+% Data da defesa. Se ficar vazio, a folha de aprovação sai com linhas em branco.
+\dataaprovacao{}
+
+% Banca examinadora: \membrobanca{Nome com titulação}{Instituição}{Função}.
+% O orientador é o primeiro membro.
+\membrobanca{Prof. Dr. Nome do Orientador}{Universidade Federal do Espírito Santo}{Orientador}
+\membrobanca{Prof. Dr. Nome do Examinador}{Universidade Federal do Espírito Santo}{Examinador interno}
+\membrobanca{Profa. Dra. Nome da Examinadora}{Instituição de origem}{Examinadora externa}
+
+% Informações do arquivo PDF.
+\makeatletter
+\hypersetup{
+  pdftitle   = {\@title},
+  pdfauthor  = {\@author},
+  pdfsubject = {\imprimirtipotrabalho},
+  pdfkeywords= {sistema web; agendamento; monitoria; engenharia de software},
+}
+\makeatother

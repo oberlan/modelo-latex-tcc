@@ -1,0 +1,140 @@
+% !TeX program = pdflatex
+% !BIB program = biber
+% ==============================================================================
+% Modelo de Trabalho de Conclusão de Curso (TCC) do tipo CIENTÍFICO
+% Ciência da Computação e Engenharia de Computação | DCE/Ceunes/Ufes
+%
+% Normas: ABNT NBR 14724:2024 (trabalhos acadêmicos), NBR 10520:2023
+% (citações), NBR 6023 (referências), NBR 6024:2012 (numeração progressiva),
+% NBR 6027:2012 (sumário) e NBR 6028:2021 (resumo).
+%
+% Adaptado do modelo do DI/CT/Ufes (Prof. Vítor E. Silva Souza), baseado no
+% abnTeX2. Distribuído sob a LaTeX Project Public License 1.3c.
+%
+% Comece pelo arquivo cientifico/dados.tex. O texto de cada capítulo traz um
+% exemplo fictício (uma heurística para o problema da mochila multidimensional)
+% e caixas de orientação que explicam o que escrever em cada parte.
+% ==============================================================================
+
+\documentclass[
+  12pt,           % tamanho da fonte (NBR 14724 recomenda 12)
+  a4paper,        % papel A4
+  oneside,        % entrega em PDF: cada seção primária começa em nova página
+  openany,
+  chapter=TITLE,  % títulos das seções primárias em caixa alta
+  english,        % idioma adicional (abstract)
+  brazil,         % idioma principal (deve ser o último)
+]{abntex2}
+
+% ------------------------------------------------------------------------------
+% Chaves de controle
+% ------------------------------------------------------------------------------
+% Caixas de orientação: troque para \mostrarinstrucoesfalse quando não
+% precisar mais delas (obrigatório na versão entregue à banca).
+\newif\ifmostrarinstrucoes
+\mostrarinstrucoestrue
+
+% Notas de revisão \notaaluno{...} e \notaorientador{...}.
+\newif\ifmostrarnotas
+\mostrarnotastrue
+
+% ------------------------------------------------------------------------------
+% Preâmbulo
+% ------------------------------------------------------------------------------
+\input{config/pacotes}
+\input{config/estilo}
+\input{config/elementos}
+\input{cientifico/dados}
+\input{cientifico/siglas}
+\addbibresource{referencias.bib}
+
+% ==============================================================================
+\begin{document}
+% ==============================================================================
+
+% ------------------------------------------------------------------------------
+% Elementos pré-textuais
+% ------------------------------------------------------------------------------
+% A capa não é contada. A contagem começa na folha de rosto (página 1), mas os
+% números só aparecem a partir da Introdução.
+\pagenumbering{Alph}
+\imprimircapa
+\pagenumbering{arabic}
+
+\imprimirfolhaderosto
+\imprimirfolhadeaprovacao
+
+% Elementos opcionais: comente as linhas que não for usar.
+\input{comum/dedicatoria}
+\input{comum/agradecimentos}
+\input{comum/epigrafe}
+
+% Resumos (obrigatórios).
+\input{cientifico/resumo}
+\input{cientifico/abstract}
+
+% Listas: mantenha apenas as dos tipos de ilustração que o trabalho usa.
+% Lista vazia não deve aparecer no trabalho.
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+
+\pdfbookmark[0]{\listofquadrosname}{loq}
+\listofquadros*
+\cleardoublepage
+
+\pdfbookmark[0]{\listofalgoritmosname}{lalg}
+\listofalgoritmos*
+\cleardoublepage
+
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+
+% \pdfbookmark[0]{\listofcodigosname}{lcod}
+% \listofcodigos*
+% \cleardoublepage
+
+% Lista de abreviaturas e siglas (gerada a partir de cientifico/siglas.tex).
+\pretextualchapter{\listadesiglasname}
+\printacronyms
+\cleardoublepage
+
+% Sumário.
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% ------------------------------------------------------------------------------
+% Elementos textuais
+% ------------------------------------------------------------------------------
+\textual
+
+\include{cientifico/capitulos/01-introducao}
+\include{cientifico/capitulos/02-fundamentacao}
+\include{cientifico/capitulos/03-trabalhos-relacionados}
+\include{cientifico/capitulos/04-metodologia}
+\include{cientifico/capitulos/05-experimentos}
+\include{cientifico/capitulos/06-conclusao}
+
+% ------------------------------------------------------------------------------
+% Elementos pós-textuais
+% ------------------------------------------------------------------------------
+\postextual
+
+% Referências (NBR 6023), geradas pelo Biber a partir de referencias.bib.
+\printbibliography[heading=bibintoc]
+
+% Apêndices: material elaborado pelo próprio autor.
+\begin{apendicesenv}
+\input{cientifico/apendices/a-declaracao-ia}
+\input{cientifico/apendices/b-resultados-detalhados}
+\end{apendicesenv}
+
+% Anexos: material de outros autores (por exemplo, um documento de terceiros
+% que o trabalho analisa). Descomente e crie o arquivo se precisar.
+% \begin{anexosenv}
+% \input{cientifico/anexos/a-nome-do-anexo}
+% \end{anexosenv}
+
+\end{document}

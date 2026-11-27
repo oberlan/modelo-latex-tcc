@@ -1,0 +1,146 @@
+% ==============================================================================
+% config/elementos.tex
+% Comandos de dados e leiaute dos elementos pré-textuais: capa, folha de rosto,
+% folha de aprovação, resumos e epígrafe. Os dados em si ficam em dados.tex.
+% ==============================================================================
+
+% ------------------------------------------------------------------------------
+% Instituição
+% ------------------------------------------------------------------------------
+\newcommand{\imprimiruniversidade}{Universidade Federal do Espírito Santo}
+\newcommand{\imprimircentro}{Centro Universitário Norte do Espírito Santo}
+\newcommand{\imprimirdepartamento}{Departamento de Computação e Eletrônica}
+
+% ------------------------------------------------------------------------------
+% Curso: \curso{cc} (Ciência da Computação) ou \curso{ec} (Engenharia de Computação)
+% ------------------------------------------------------------------------------
+\newcommand{\imprimircurso}{Ciência da Computação}
+\newcommand{\imprimirgrau}{Bacharel em Ciência da Computação}
+\newcommand{\curso}[1]{%
+  \ifthenelse{\equal{#1}{ec}}{%
+    \renewcommand{\imprimircurso}{Engenharia de Computação}%
+    \renewcommand{\imprimirgrau}{Bacharel em Engenharia de Computação}%
+  }{%
+    \renewcommand{\imprimircurso}{Ciência da Computação}%
+    \renewcommand{\imprimirgrau}{Bacharel em Ciência da Computação}%
+  }%
+}
+\newcommand{\imprimircolegiado}{Colegiado do Curso de \imprimircurso}
+
+% Natureza do trabalho (folha de rosto e folha de aprovação).
+\newcommand{\imprimirnatureza}{%
+  Trabalho de Conclusão de Curso apresentado ao \imprimircolegiado{} do
+  \imprimircentro{} da \imprimiruniversidade, como requisito parcial para
+  obtenção do grau de \imprimirgrau.}
+\preambulo{\imprimirnatureza}
+\tipotrabalho{Trabalho de Conclusão de Curso (Graduação)}
+
+\local{São Mateus, ES}
+
+% ------------------------------------------------------------------------------
+% Dados complementares
+% ------------------------------------------------------------------------------
+% Subtítulo (opcional). Na capa e na folha de rosto aparece após dois-pontos.
+\newcommand{\imprimirsubtitulo}{}
+\newcommand{\subtitulo}[1]{\renewcommand{\imprimirsubtitulo}{#1}}
+\newcommand{\imprimirtitulocompleto}{%
+  \imprimirtitulo\ifdefempty{\imprimirsubtitulo}{}{: \imprimirsubtitulo}}
+
+% Data de aprovação. Deixe vazio para gerar linhas em branco a preencher.
+\newcommand{\imprimirdataaprovacao}{}
+\newcommand{\dataaprovacao}[1]{\renewcommand{\imprimirdataaprovacao}{#1}}
+
+% Banca examinadora: \membrobanca{Nome com titulação}{Instituição}{Função}
+\makeatletter
+\newcommand{\imprimirbanca}{}
+\newcommand{\membrobanca}[3]{%
+  \g@addto@macro\imprimirbanca{%
+    \assinatura{\textbf{#1}\\#2\ifthenelse{\equal{#3}{}}{}{\\#3}}}%
+}
+\makeatother
+
+% Palavras-chave (NBR 6028:2021): separadas por ponto e vírgula e
+% finalizadas por ponto. Ex.: \palavraschave{otimização; heurística; mochila}
+\newcommand{\palavraschave}[1]{%
+  \par\vspace{\baselineskip}\noindent\textbf{Palavras-chave}: #1.}
+\newcommand{\keywords}[1]{%
+  \par\vspace{\baselineskip}\noindent\textbf{Keywords}: #1.}
+
+% ------------------------------------------------------------------------------
+% Capa (NBR 14724:2024, 4.1.1)
+% ------------------------------------------------------------------------------
+\renewcommand{\imprimircapa}{%
+  \begin{capa}%
+    \centering\SingleSpacing
+    \includegraphics[width=3.3cm]{figuras/logo-ufes}\par
+    \vspace{0.6cm}
+    {\bfseries
+      % \MakeTextUppercase{\imprimiruniversidade}\par
+      \MakeTextUppercase{\imprimircentro}\par
+      \MakeTextUppercase{\imprimirdepartamento}\par
+      \MakeTextUppercase{\imprimircolegiado}\par}
+    \vfill
+    {\large\imprimirautor\par}
+    \vfill
+    {\bfseries\Large\imprimirtitulocompleto\par}
+    \vfill\vfill
+    {\large\imprimirlocal\par
+     \imprimirdata\par}
+  \end{capa}%
+}
+
+% ------------------------------------------------------------------------------
+% Folha de rosto (NBR 14724:2024, 4.2.1.1)
+% ------------------------------------------------------------------------------
+\renewcommand{\imprimirfolhaderosto}{%
+  \begin{folhaderosto}%
+    \centering\SingleSpacing
+    {\large\imprimirautor\par}
+    \vfill
+    {\bfseries\Large\imprimirtitulocompleto\par}
+    \vfill
+    \noindent\hspace*{.45\textwidth}%
+    \begin{minipage}{.55\textwidth}
+      \justifying\imprimirnatureza
+
+      \vspace{\baselineskip}
+      \imprimirorientadorRotulo~\imprimirorientador
+      \ifdefempty{\imprimircoorientador}{}{\par
+        \imprimircoorientadorRotulo~\imprimircoorientador}
+    \end{minipage}\par
+    \vfill\vfill
+    {\large\imprimirlocal\par
+     \imprimirdata\par}
+  \end{folhaderosto}%
+}
+
+% ------------------------------------------------------------------------------
+% Folha de aprovação (NBR 14724:2024, 4.2.1.3)
+% ------------------------------------------------------------------------------
+\newcommand{\imprimirfolhadeaprovacao}{%
+  \begin{folhadeaprovacao}%
+    \centering
+    {\large\imprimirautor\par}
+    \vspace{1.2cm}
+    {\bfseries\Large\imprimirtitulocompleto\par}
+    \vspace{1.2cm}
+    \noindent\hspace*{.45\textwidth}%
+    \begin{minipage}{.55\textwidth}
+      \justifying\imprimirnatureza
+    \end{minipage}\par
+    \vspace{1cm}
+    \raggedright
+    Aprovado em
+    \ifdefempty{\imprimirdataaprovacao}%
+      {\rule{1.2cm}{0.4pt} de \rule{3.5cm}{0.4pt} de \rule{1.6cm}{0.4pt}.}%
+      {\imprimirdataaprovacao.}\par
+    \vspace{0.8cm}
+    \centering
+    {\bfseries BANCA EXAMINADORA\par}
+    \imprimirbanca
+  \end{folhadeaprovacao}%
+}
+
+% \justifying para minipages (o memoir não define este comando).
+\providecommand{\justifying}{%
+  \rightskip=0pt plus 0pt\leftskip=0pt\parfillskip=0pt plus 1fil\relax}

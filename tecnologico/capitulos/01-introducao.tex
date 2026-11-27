@@ -1,0 +1,250 @@
+% ==============================================================================
+% Capítulo 1: Introdução
+% ==============================================================================
+\chapter{Introdução}
+\label{cap:introducao}
+
+\begin{instrucao}
+\orientacao{O que vai na Introdução}
+A Introdução situa quem lê o trabalho. Em um trabalho tecnológico, cujo foco principal é
+o produto desenvolvido, ela apresenta o contexto, o problema que o software
+resolve, quem são os usuários, os objetivos, a justificativa, o método de
+desenvolvimento e a organização do texto. Como referência, de três a cinco
+páginas costumam ser suficientes. Escreva uma primeira versão no início e
+reescreva no final, porque a Introdução promete o que o resto do texto precisa
+cumprir.
+
+Comece pelo geral e avance até o problema específico. Descreva o problema do
+ponto de vista de quem o enfrenta, e não da tecnologia. ``Não existe um
+aplicativo em Django para monitorias'' não é um problema. ``Estudantes não
+conseguem saber quando há monitor disponível'' é.
+
+\orientacao{Capítulo ou seção?}
+A NBR 14724:2024 determina que o trabalho seja dividido em seções, e não em
+capítulos. No LaTeX nada muda (continue usando \verb|\chapter|, que gera o
+título ``1 INTRODUÇÃO''). A diferença está só no nome usado nas referências
+cruzadas, que este modelo controla pelo comando \verb|\termocap| em
+\verb|config/estilo.tex|. O padrão segue as regras de TCC do curso
+(``Capítulo'').
+
+\orientacao{Rótulos}
+Logo após cada \verb|\chapter| ou \verb|\section|, coloque um
+\verb|\label| com um prefixo que indique o tipo: \verb|cap:| para capítulos,
+\verb|sec:| para seções, \verb|fig:| para figuras, \verb|tab:| para tabelas,
+\verb|qua:| para quadros, \verb|cod:| para códigos e assim por diante. Nunca
+use acentos ou espaços nos rótulos.
+\end{instrucao}
+
+\begin{instrucao}
+\orientacao{Pessoa verbal e estilo acadêmico}
+Textos acadêmicos são escritos, por convenção, de forma impessoal. A NBR
+14724:2024 não determina a pessoa verbal do trabalho, mas a NBR 6028:2021
+recomenda o verbo na terceira pessoa no resumo (item 4.1.4). Este modelo
+estende essa recomendação a todo o texto, para que ele fique uniforme. Use:
+\begin{itemize}
+  \item a terceira pessoa do singular, com o trabalho, o método ou o sistema
+        como sujeito (``este trabalho propõe'', ``a heurística obteve'',
+        ``o sistema permite'');
+  \item ou a voz passiva (``os experimentos foram executados'', ``observa-se
+        que'', ``adotou-se'').
+\end{itemize}
+Evite a primeira pessoa do singular (``eu proponho'') e do plural (``nós
+propomos'', ``vamos mostrar''), mesmo como plural de modéstia. Algumas áreas
+aceitam o ``nós'', mas a forma impessoal é a convenção predominante nos
+trabalhos acadêmicos. Qualquer que seja a escolha, não misture as duas formas
+no mesmo texto, um erro frequente nos TCCs. As exceções são
+os agradecimentos, a dedicatória e a declaração de uso de inteligência
+artificial, escritos na primeira pessoa do singular por serem manifestações
+pessoais do autor.
+
+\begin{itemize}
+  \item \textbf{Evite:} ``Neste trabalho, vamos propor uma heurística e
+        mostraremos que ela é melhor.''
+  \item \textbf{Prefira:} ``Este trabalho propõe uma heurística e avalia seu
+        desempenho em relação a \ldots''
+\end{itemize}
+
+Algumas regras de redação ajudam o texto a soar claro e profissional:
+\begin{itemize}
+  \item escreva frases diretas e evite expressões de preenchimento como ``vale
+        ressaltar que'' e ``é importante notar que'';
+  \item evite adjetivos de efeito (``crucial'', ``poderoso'', ``robusto'') e
+        afirmações sem dados ou citação (``muito usado'', ``o melhor método'');
+  \item não use linguagem coloquial nem perguntas retóricas;
+  \item use vírgula decimal e ponto como separador de milhar (0,41\% e
+        1.200), inclusive em tabelas e gráficos.
+\end{itemize}
+\end{instrucao}
+
+A monitoria é uma das principais ações de apoio ao estudante nas disciplinas
+iniciais dos cursos de Computação. Nela, estudantes que já cursaram a
+disciplina atendem colegas com dificuldades, sob a supervisão de um professor.
+Nas disciplinas de programação e de estrutura de dados, em que as taxas de
+reprovação costumam ser altas, a monitoria é frequentemente o primeiro recurso
+procurado pelos alunos.
+
+No curso usado como estudo de caso, os horários de monitoria são divulgados em
+grupos de mensagens e a marcação de atendimentos depende de conversas
+individuais com os monitores. Esse processo informal gera conflitos de
+horário, atendimentos não registrados e falta de informação para o professor
+supervisor, que precisa comprovar a frequência dos monitores e não sabe quais
+assuntos geram mais dúvidas.
+
+\begin{instrucao}
+\orientacao{Siglas}
+Declare cada sigla uma única vez no arquivo \verb|tecnologico/siglas.tex| e use
+\verb|\ac{chave}| no texto. Na primeira ocorrência o LaTeX escreve a forma
+extensa seguida da sigla. Nas seguintes, apenas a sigla. A lista de siglas é
+montada sozinha, só com as siglas usadas.
+\begin{exemplo}
+A \ac{abnt} publica as normas.
+Este trabalho segue as
+normas da \ac{abnt}.
+\end{exemplo}
+\acreset{abnt}% desfaz o uso da sigla no exemplo acima
+Em títulos e legendas use \verb|\acs{chave}|, que imprime só a sigla. Para o
+plural, use \verb|\acp{chave}|. Não use \verb|\ac| no resumo.
+\end{instrucao}
+
+% ------------------------------------------------------------------------------
+\section{Problema}
+\label{sec:introducao:problema}
+
+O problema tratado neste trabalho é a ausência de um meio centralizado para
+divulgar os horários de monitoria, reservar atendimentos e registrar o que foi
+atendido. A falta desse meio afeta três grupos de usuários. Os estudantes não
+sabem quando há monitor disponível e perdem tempo procurando atendimento. Os
+monitores recebem pedidos fora do horário e não têm como organizar a agenda. Os
+professores não conseguem acompanhar a frequência dos monitores nem identificar
+os conteúdos com mais dúvidas.
+
+% ------------------------------------------------------------------------------
+\section{Objetivos}
+\label{sec:introducao:objetivos}
+
+\begin{instrucao}
+\orientacao{Como escrever os objetivos}
+O \textbf{objetivo geral} expressa o resultado principal do trabalho em uma
+única frase iniciada por verbo no infinitivo. Em um trabalho tecnológico, ele
+costuma ser ``desenvolver um sistema que\ldots'', seguido do que o sistema
+permite fazer e para quem. Os \textbf{objetivos específicos} são os resultados
+intermediários e devem ser verificáveis. Em software, eles costumam
+corresponder às etapas do desenvolvimento (levantar requisitos, projetar a
+arquitetura, implementar, avaliar com usuários).
+
+Evite verbos vagos como \emph{estudar}, \emph{conhecer} ou \emph{aprender},
+que descrevem o processo de estudo, e não o resultado do trabalho. Evite também
+objetivos que são apenas tecnologias (``usar o Django'').
+\begin{itemize}
+  \item \textbf{Fraco:} ``Aprender Django e fazer um site de monitorias.''
+  \item \textbf{Melhor:} ``Desenvolver um sistema web que permita a estudantes
+        reservar horários de monitoria e a professores acompanhar os
+        atendimentos.''
+\end{itemize}
+Para listas numeradas por letras, como pede a NBR 6024 para alíneas, use o
+ambiente \verb|alineas| do abnTeX2.
+\end{instrucao}
+
+O objetivo geral deste trabalho é desenvolver um sistema web que permita aos
+monitores publicar seus horários de atendimento, aos estudantes reservar esses
+horários e aos professores acompanhar a frequência e os temas das monitorias.
+Para alcançá-lo, foram definidos os seguintes objetivos específicos:
+\begin{alineas}
+  \item levantar e especificar os requisitos do sistema com monitores e
+        professores do curso;
+  \item comparar o sistema proposto com as soluções usadas atualmente e com
+        ferramentas de agendamento disponíveis no mercado;
+  \item projetar a arquitetura e o modelo de dados do sistema;
+  \item implementar o sistema e implantá-lo em ambiente de homologação;
+  \item verificar o sistema por meio de testes automatizados e avaliar sua
+        usabilidade com usuários reais.
+\end{alineas}
+
+% ------------------------------------------------------------------------------
+\section{Justificativa}
+\label{sec:introducao:justificativa}
+
+\begin{instrucao}
+\orientacao{Justificativa e citações}
+Mostre por que o sistema é necessário e por que as soluções existentes não
+bastam. Dados concretos ajudam (número de monitores, de atendimentos, de
+estudantes atendidos), assim como relatos dos usuários levantados nas
+entrevistas. Toda afirmação que não seja de conhecimento geral da área precisa
+de citação.
+
+Este modelo usa o biblatex-abnt, que segue a NBR 10520:2023. Na nova norma, o
+sobrenome do autor aparece com apenas a inicial maiúscula também dentro dos
+parênteses. Use \verb|\textcite| quando o autor faz parte da frase e
+\verb|\cite| quando a citação vai entre parênteses.
+\begin{exemplo}
+Segundo \textcite{cohn2004user},
+histórias devem ser pequenas.
+
+Histórias devem ser pequenas
+\cite{cohn2004user}.
+
+Com página:
+\cite[p.~23]{cohn2004user}.
+
+Várias obras:
+\cite{sommerville2018engenharia,
+pressman2021engenharia}.
+\end{exemplo}
+As chaves (como \verb|cohn2004user|) são definidas no arquivo
+\verb|referencias.bib|, que traz exemplos de livros, artigos, capítulos,
+páginas web e ferramentas. Só entram nas Referências as obras citadas no texto.
+\end{instrucao}
+
+Ferramentas genéricas de agendamento resolvem parte do problema, mas não
+registram a frequência exigida nos relatórios de monitoria nem associam os
+atendimentos às disciplinas e aos conteúdos. Planilhas compartilhadas, por sua
+vez, não impedem reservas simultâneas no mesmo horário e dependem de
+preenchimento manual. Um sistema próprio, construído a partir das necessidades
+levantadas com os usuários, permite tratar essas lacunas e gerar dados para a
+gestão das monitorias pelo colegiado.
+
+Do ponto de vista da formação, o desenvolvimento do sistema integra conteúdos
+de engenharia de requisitos, projeto de software, bancos de dados e testes,
+aplicados a um problema real da comunidade acadêmica
+\cite{sommerville2018engenharia}.
+
+% ------------------------------------------------------------------------------
+\section{Método de desenvolvimento}
+\label{sec:introducao:metodo}
+
+\begin{instrucao}
+\orientacao{Método de desenvolvimento}
+Descreva o processo seguido (Scrum, Kanban, processo incremental), como os
+requisitos foram levantados, como o trabalho foi dividido em ciclos e como o
+progresso foi acompanhado. Se fez estudo de viabilidade, cronograma e análise
+de riscos, como pedem as competências do TCC, resuma-os aqui e coloque os
+detalhes em um apêndice, como no \cref{ap:planejamento}.
+\end{instrucao}
+
+O sistema foi desenvolvido com um processo iterativo baseado no Scrum
+\cite{schwaber2020scrum}, adaptado a uma equipe de uma pessoa. O trabalho foi
+dividido em seis ciclos (\emph{sprints}) de duas semanas, cada um com
+planejamento, implementação, revisão com o orientador e retrospectiva. Os
+requisitos foram levantados em entrevistas com quatro monitores e dois
+professores supervisores e registrados como histórias de usuário. O
+cronograma e a análise de riscos do projeto estão no \cref{ap:planejamento}.
+
+% ------------------------------------------------------------------------------
+\section{Organização do trabalho}
+\label{sec:introducao:organizacao}
+
+\begin{instrucao}
+\orientacao{Organização do texto}
+Feche a Introdução descrevendo o que cada capítulo apresenta. Use
+\verb|\Cref{rotulo}| no início da frase e \verb|\cref{rotulo}| no meio dela. O
+número é atualizado sozinho se a ordem dos capítulos mudar.
+\end{instrucao}
+
+Além desta introdução, o trabalho está organizado da seguinte forma. O
+\cref{cap:fundamentacao} apresenta os conceitos e as tecnologias usados no
+desenvolvimento. O \cref{cap:solucoes} compara o sistema proposto com
+soluções existentes. O \cref{cap:requisitos} apresenta os requisitos do
+sistema. O \cref{cap:projeto} descreve a arquitetura e os modelos de
+software. O \cref{cap:implementacao} trata da implementação e o
+\cref{cap:testes} apresenta a verificação e a avaliação com usuários. Por fim, o \cref{cap:conclusao}
+apresenta as considerações finais.

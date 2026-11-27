@@ -1,0 +1,109 @@
+# ==============================================================================
+# .gitignore do modelo de TCC (LaTeX + biblatex/Biber)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# PDFs gerados pela compilação
+# ------------------------------------------------------------------------------
+# Apenas os PDFs dos arquivos principais. As figuras em PDF (figuras/**/*.pdf)
+# continuam versionadas.
+/tcc-cientifico.pdf
+/tcc-tecnologico.pdf
+
+# ------------------------------------------------------------------------------
+# Arquivos auxiliares do LaTeX
+# ------------------------------------------------------------------------------
+*.aux
+*.lof
+*.log
+*.lot
+*.toc
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex
+*.synctex.gz
+*.synctex(busy)
+*.synctex.gz(busy)
+*.pdfsync
+*.xdv
+*.dvi
+*.ps
+
+# Listas criadas pelo modelo (quadros, códigos e algoritmos)
+*.loq
+*.lcod
+*.lalg
+
+# Listagens (listings) e notas (todonotes)
+*.lol
+*.tdo
+
+# Índice remissivo (caso alguém o habilite)
+*.idx
+*.ilg
+*.ind
+
+# ------------------------------------------------------------------------------
+# Bibliografia (biblatex/Biber)
+# ------------------------------------------------------------------------------
+*.bbl
+*.bbl-SAVE-ERROR
+*.bcf
+*.bcf-SAVE-ERROR
+*.blg
+*.run.xml
+
+# ------------------------------------------------------------------------------
+# Pacotes específicos
+# ------------------------------------------------------------------------------
+# acro (siglas)
+*.acr
+*.acn
+*.alg
+
+# tcolorbox (arquivos temporários das caixas de exemplo)
+*.listing
+*.tcbtemp
+
+# pgfplots/TikZ externalizados
+*.dpth
+*.md5
+*.auxlock
+*-figure*.pdf
+*-figure*.log
+
+# minted (caso alguém troque o listings pelo minted)
+_minted*/
+*.pyg
+
+# comment (versões excluídas das caixas de orientação)
+comment.cut
+
+# ------------------------------------------------------------------------------
+# Python (script de geração de figuras)
+# ------------------------------------------------------------------------------
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ------------------------------------------------------------------------------
+# Editores e sistemas operacionais
+# ------------------------------------------------------------------------------
+# VS Code (LaTeX Workshop) e TeXstudio
+.vscode/
+*.bak
+*.sav
+*.backup
+*~
+*.swp
+
+# macOS e Windows
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Pasta de saída comum em compilações locais (latexmk -outdir=build)
+build/
+out/

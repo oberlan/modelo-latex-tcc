@@ -1,0 +1,69 @@
+% ==============================================================================
+% Capítulo 6: Conclusão
+% ==============================================================================
+\chapter{Conclusão}
+\label{cap:conclusao}
+
+\begin{instrucao}
+\orientacao{O que vai na Conclusão}
+A Conclusão fecha o trabalho. Ela retoma a questão de pesquisa e os objetivos,
+mostra como cada um foi atingido, resume as contribuições, reconhece as
+limitações e aponta trabalhos futuros. Como referência, de duas a quatro
+páginas costumam ser suficientes.
+
+Não apresente resultados novos nem repita a discussão do capítulo anterior. A
+Conclusão costuma ter poucas citações, porque trata do que o próprio trabalho
+produziu. Uma forma eficaz de organizá-la é percorrer os objetivos
+específicos na mesma ordem em que aparecem na Introdução, indicando onde cada
+um foi tratado.
+\end{instrucao}
+
+Este trabalho propôs uma heurística de \acs{ils} para o \acs{mkp} com
+perturbação adaptativa e avaliou seu desempenho em instâncias de referência da
+literatura. Os resultados mostraram que, com 60 segundos de execução, a
+heurística obtém soluções mais próximas das melhores conhecidas do que o
+solucionador HiGHS nas instâncias com 250 e 500 itens, respondendo
+afirmativamente à questão de pesquisa formulada na
+\cref{sec:introducao:problema}.
+
+Os objetivos específicos foram atingidos da seguinte forma. A revisão das
+abordagens heurísticas e das instâncias de referência foi apresentada no
+\cref{cap:relacionados}. A heurística proposta e o modelo de \acs{pli} foram
+descritos e implementados conforme o \cref{cap:metodologia}. A comparação com
+o solucionador e com o \acs{ag} da literatura, bem como a avaliação da
+perturbação adaptativa, foram apresentadas no \cref{cap:experimentos}.
+
+% ------------------------------------------------------------------------------
+\section{Contribuições e limitações}
+\label{sec:conclusao:contribuicoes}
+
+A principal contribuição do trabalho é uma heurística simples, com apenas dois
+parâmetros e sem resolver programas lineares durante a busca, que obtém
+resultados competitivos em tempo limitado. A análise dos componentes mostrou
+que a perturbação adaptativa é responsável por boa parte do ganho de
+desempenho, sobretudo nas instâncias com mais restrições.
+
+Como limitações, a heurística ainda fica atrás dos melhores métodos híbridos
+da literatura quando o tempo de execução não é restrito. Além disso, a
+comparação com o \acs{ag} usou resultados publicados, obtidos em outro
+hardware, e a avaliação se restringiu às instâncias da OR-Library.
+
+% ------------------------------------------------------------------------------
+\section{Trabalhos futuros}
+\label{sec:conclusao:futuros}
+
+\begin{instrucao}
+\orientacao{Trabalhos futuros}
+Evite listas genéricas como ``melhorar o desempenho'' ou ``testar com mais
+dados''. Para cada sugestão, explique por que ela é promissora e como poderia
+ser realizada, com base no que o trabalho mostrou.
+\end{instrucao}
+
+Os resultados sugerem três direções de continuidade. A primeira é usar a
+relaxação linear apenas na construção da solução inicial, o que poderia
+aproximar a heurística dos métodos híbridos sem aumentar o custo de cada
+iteração. A segunda é adaptar a heurística a variantes do problema com
+restrições adicionais, como conflitos entre itens, aproveitando o fato de que
+a busca local mantém a viabilidade a cada movimento. A terceira é avaliar a
+heurística em instâncias maiores e mais recentes, para verificar se a
+vantagem sobre o solucionador se mantém com o crescimento do número de itens.

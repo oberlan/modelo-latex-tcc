@@ -1,0 +1,34 @@
+% ==============================================================================
+% Resumo em língua estrangeira (obrigatório, NBR 14724:2024)
+% ==============================================================================
+\begin{resumo}[Abstract]
+\begin{instrucao}
+\orientacao{Abstract}
+Versão do resumo em inglês, com o mesmo conteúdo e as mesmas regras. Não use
+tradução automática sem revisão cuidadosa. Termos técnicos devem seguir o uso
+da área (por exemplo, \emph{multidimensional knapsack problem}, e não uma
+tradução literal). Se usar ferramenta de IA para traduzir ou revisar, declare
+o uso no apêndice sobre inteligência artificial.
+\end{instrucao}
+
+\begin{otherlanguage*}{english}
+The multidimensional knapsack problem consists of selecting a subset of items
+with maximum total value without exceeding the capacity of several resources at
+the same time. It models decisions such as budget allocation among projects and
+task selection on servers with processing and memory limits. Since the problem
+is NP-hard, large instances are usually not solved to optimality in reasonable
+time by integer linear programming solvers. This work proposes an iterated local
+search heuristic that combines a greedy initial solution, based on an efficiency
+ratio weighted by the constraints, with a swap-based local search and an
+adaptive perturbation. The heuristic was implemented in C++ and compared with
+the HiGHS solver and a genetic algorithm from the literature on 270 OR-Library
+instances, with a time limit of 60 seconds per instance. The heuristic achieved
+an average gap of 0.41\% from the best known solutions, against 1.87\% for the
+solver in the same time, and outperformed the genetic algorithm in 82\% of the
+instances. The results indicate that the adaptive perturbation is the component
+that contributes most to performance, especially on instances with 500 items.
+
+\keywords{multidimensional knapsack; iterated local search; heuristic;
+combinatorial optimization}
+\end{otherlanguage*}
+\end{resumo}

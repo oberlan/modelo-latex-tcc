@@ -1,0 +1,70 @@
+% ==============================================================================
+% Capítulo 8: Considerações finais
+% ==============================================================================
+\chapter{Considerações finais}
+\label{cap:conclusao}
+
+\begin{instrucao}
+\orientacao{O que vai nas Considerações Finais}
+Retome o problema e os objetivos, mostre como cada objetivo específico foi
+atingido e em que capítulo, resuma o que foi entregue, reconheça as
+limitações, relate as lições aprendidas e as dificuldades enfrentadas e aponte
+trabalhos futuros. Como referência, de duas a quatro páginas costumam ser
+suficientes.
+
+Não apresente resultados novos. Em trabalhos tecnológicos, vale informar a
+situação do sistema ao final do trabalho (em uso, em homologação, aguardando
+implantação) e o que falta para colocá-lo em produção.
+\end{instrucao}
+
+Este trabalho apresentou o Monitora, um sistema web para agendamento de
+monitorias que substitui o processo informal baseado em mensagens e planilhas.
+O sistema permite que monitores publiquem horários, que estudantes reservem
+atendimentos e que professores acompanhem a frequência e os assuntos
+atendidos, mantendo os dados em infraestrutura da universidade.
+
+Os objetivos específicos foram atingidos da seguinte forma. Os requisitos
+foram levantados com monitores e professores e especificados no
+\cref{cap:requisitos}. A comparação com as soluções existentes, apresentada no
+\cref{cap:solucoes}, mostrou que nenhuma delas atendia ao conjunto de
+necessidades identificado. A arquitetura e o modelo de dados foram descritos
+no \cref{cap:projeto}. A implementação e a implantação em ambiente de
+homologação foram apresentadas no \cref{cap:implementacao}. Por fim, o \cref{cap:testes} mostrou
+que todos os requisitos não funcionais foram atendidos e que os usuários
+avaliaram positivamente a usabilidade do sistema.
+
+% ------------------------------------------------------------------------------
+\section{Limitações e lições aprendidas}
+\label{sec:conclusao:limitacoes}
+
+O sistema ainda não está integrado ao sistema acadêmico da universidade, o que
+obriga o professor a cadastrar manualmente os monitores a cada semestre. A
+avaliação com usuários envolveu um número pequeno de participantes de apenas
+duas disciplinas. Por isso, os resultados podem não se repetir em turmas maiores.
+
+Do ponto de vista do processo, a validação dos protótipos antes da
+implementação evitou retrabalho, já que duas mudanças importantes na tela de
+reserva surgiram nessa etapa. A principal dificuldade foi estimar o esforço das
+histórias nos primeiros ciclos, que ficaram sobrecarregados. A partir do
+terceiro ciclo, o uso da velocidade observada nos ciclos anteriores tornou o
+planejamento mais preciso.
+
+% ------------------------------------------------------------------------------
+\section{Trabalhos futuros}
+\label{sec:conclusao:futuros}
+
+\begin{instrucao}
+\orientacao{Trabalhos futuros}
+Evite listas genéricas como ``melhorar a interface''. Para cada sugestão,
+explique por que ela é relevante e como poderia ser feita, com base no que o
+trabalho mostrou (requisitos de baixa prioridade, comentários dos usuários,
+limitações encontradas).
+\end{instrucao}
+
+A sugestão mais pedida pelos professores foi exportar os relatórios em
+planilha, o que pode ser feito com pouco esforço a partir das consultas já
+implementadas. A integração com o sistema acadêmico eliminaria o cadastro
+manual de monitores, mas depende da disponibilização de uma interface de
+programação pela equipe de tecnologia da universidade. Por fim, um painel com
+os assuntos mais procurados em cada disciplina poderia ajudar os professores a
+identificar conteúdos que precisam de reforço em sala de aula.

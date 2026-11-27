@@ -1,0 +1,131 @@
+% ==============================================================================
+% Capítulo 3: Soluções relacionadas
+% ==============================================================================
+\chapter{Soluções relacionadas}
+\label{cap:solucoes}
+
+\begin{instrucao}
+\orientacao{O que vai em Soluções Relacionadas}
+Em um trabalho tecnológico, este capítulo corresponde aos trabalhos
+relacionados de um trabalho científico. As competências do TCC pedem que o
+projeto seja relacionado às soluções de mercado equivalentes, demonstrando sua
+relevância. Analise:
+\begin{itemize}
+  \item produtos e serviços que resolvem o mesmo problema ou parte dele;
+  \item sistemas institucionais já existentes;
+  \item trabalhos acadêmicos (artigos e TCCs) que desenvolveram sistemas
+        semelhantes.
+\end{itemize}
+Defina critérios de comparação ligados aos requisitos do seu sistema e
+aplique-os a todas as soluções. Termine com um quadro comparativo e um
+parágrafo que mostre o que o seu sistema oferece de diferente. Se alguma
+solução já resolve bem o problema, diga isso e explique por que ela não serve
+ao seu contexto (custo, integração, privacidade dos dados).
+
+Ao descrever produtos comerciais, informe a data de consulta, porque
+funcionalidades e preços mudam. Cite a página do produto como referência
+(\verb|@misc| com \verb|url| e \verb|urldate|).
+\end{instrucao}
+
+As soluções usadas hoje para organizar monitorias se dividem em ferramentas
+genéricas de agendamento, planilhas e formulários compartilhados e o sistema
+acadêmico institucional. Esta análise considerou os critérios que emergiram
+das entrevistas com os usuários, descritas no \cref{cap:requisitos}.
+
+% ------------------------------------------------------------------------------
+\section{Ferramentas genéricas de agendamento}
+
+Serviços de agendamento \emph{on-line} permitem que uma pessoa publique seus
+horários livres e que outras reservem esses horários por um endereço web.
+Eles evitam reservas simultâneas e enviam lembretes, mas são pensados para
+atendimentos individuais de profissionais. Não associam a reserva a uma
+disciplina, não registram a presença do estudante nem o assunto atendido e,
+nas versões gratuitas, costumam limitar o número de agendas por conta. Além
+disso, exigem que os estudantes informem dados pessoais a um serviço externo
+à universidade.
+
+% ------------------------------------------------------------------------------
+\section{Planilhas e formulários compartilhados}
+
+Planilhas e formulários são a solução mais usada pelos monitores entrevistados.
+São gratuitos e conhecidos, mas não impedem que dois estudantes reservem o
+mesmo horário, não enviam avisos e dependem do monitor para consolidar os
+registros de frequência ao fim do mês. Os professores relataram que os
+registros chegam incompletos e em formatos diferentes de um monitor para outro.
+
+% ------------------------------------------------------------------------------
+\section{Sistema acadêmico institucional}
+
+O sistema acadêmico da universidade registra os monitores vinculados a cada
+disciplina e controla o pagamento de bolsas, mas não oferece funcionalidades
+de agendamento ou de registro de atendimentos. Integrar o Monitora a esse
+sistema seria desejável, porém exigiria acesso a interfaces de programação
+que não estão disponíveis para projetos de estudantes.
+
+% ------------------------------------------------------------------------------
+\section{Comparação}
+
+O \cref{qua:comparacao} compara as três categorias com o sistema proposto. O
+Monitora é a única opção que reúne agendamento sem conflitos, registro de
+frequência e de assuntos atendidos e relatórios por disciplina, mantendo os
+dados dos estudantes em infraestrutura da universidade.
+
+\begin{quadro}[htbp]
+  \centering
+  \caption{Comparação entre as soluções existentes e o Monitora}
+  \label{qua:comparacao}
+  \small
+  \begin{tabularx}{\textwidth}{|X|c|c|c|c|}
+    \hline
+    \textbf{Critério} & \textbf{Agendadores} & \textbf{Planilhas} &
+      \textbf{\begin{tabular}[c]{@{}c@{}}Sistema\\acadêmico\end{tabular}} &
+      \textbf{Monitora} \\
+    \hline
+    Impede reservas simultâneas & Sim & Não & Não & Sim \\
+    \hline
+    Associa atendimento à disciplina & Não & Parcial & Sim & Sim \\
+    \hline
+    Registra frequência e assunto & Não & Parcial & Não & Sim \\
+    \hline
+    Envia lembretes & Sim & Não & Não & Sim \\
+    \hline
+    Gera relatórios por disciplina & Não & Não & Parcial & Sim \\
+    \hline
+    Dados em infraestrutura da Ufes & Não & Não & Sim & Sim \\
+    \hline
+  \end{tabularx}
+  \fonte{Elaborado pelo próprio autor com base nas entrevistas e em consultas
+    realizadas em outubro de 2026.}
+\end{quadro}
+
+\begin{instrucao}
+\orientacao{Quadro ou tabela?}
+A NBR 14724 distingue os dois. O \textbf{quadro} organiza informações
+textuais em linhas e colunas e tem bordas fechadas, com linhas verticais,
+como o \cref{qua:comparacao}. A \textbf{tabela} apresenta dados, em geral
+numéricos, e segue as normas do IBGE, com bordas laterais abertas e sem linhas
+verticais (veja a \cref{tab:cobertura} no \cref{cap:testes}). Quadros e
+tabelas têm listas e numeração próprias. A identificação fica acima e a fonte
+abaixo, como nas figuras.
+\begin{exemplocodigo}
+\begin{quadro}[htbp]
+  \centering
+  \caption{Comparação entre as soluções}
+  \label{qua:comparacao}
+  \small
+  \begin{tabular}{|l|c|c|}
+    \hline
+    \textbf{Critério} & \textbf{Planilhas} & \textbf{Monitora} \\
+    \hline
+    Impede reservas simultâneas & Não & Sim \\
+    \hline
+  \end{tabular}
+  \fonteautor
+\end{quadro}
+\end{exemplocodigo}
+Para montar tabelas e quadros mais elaborados, o site
+\href{https://www.tablesgenerator.com/}{Tables Generator}
+(\url{https://www.tablesgenerator.com/}) gera o código LaTeX a partir de uma
+planilha. Depois de colar o código, ajuste-o ao padrão do modelo (ambiente
+\verb|table| ou \verb|quadro|, \verb|\caption| acima e \verb|\fonte| abaixo).
+\end{instrucao}

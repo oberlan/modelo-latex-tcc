@@ -1,0 +1,235 @@
+% ==============================================================================
+% Capítulo 2: Fundamentação teórica
+% ==============================================================================
+\chapter{Fundamentação teórica}
+\label{cap:fundamentacao}
+
+\begin{instrucao}
+\orientacao{O que vai na Fundamentação Teórica}
+Aqui entram os conceitos de que quem lê o trabalho precisa para entender o restante do
+trabalho, e somente eles. A Fundamentação não é um livro-texto sobre o
+assunto. Antes de incluir um conceito, pergunte se ele será usado nos
+capítulos seguintes. Como referência, de dez a quinze páginas costumam ser
+suficientes.
+
+Escreva com suas palavras e cite as fontes (livros, artigos, teses). A citação
+direta (cópia literal) deve ser exceção, reservada a definições ou trechos
+cuja redação exata importa. Uma sequência de citações diretas não constitui
+fundamentação. Copiar texto sem citar é plágio e, pelas regras do TCC, leva à
+reprovação com nota zero.
+
+Abra o capítulo com um parágrafo curto que diga o que será apresentado e em
+que ordem. Evite seções com uma única subseção e títulos sem texto entre eles.
+\end{instrucao}
+
+Este capítulo apresenta os conceitos que fundamentam o trabalho. A
+\cref{sec:fundamentacao:mkp} define formalmente o \acs{mkp}. A
+\cref{sec:fundamentacao:pli} trata da resolução exata por \acl{pli} e de suas
+limitações. A \cref{sec:fundamentacao:ils} apresenta a metaheurística de
+\acl{ils}, base da heurística proposta.
+
+% ------------------------------------------------------------------------------
+\section{O problema da mochila multidimensional}
+\label{sec:fundamentacao:mkp}
+
+Considere um conjunto de $n$ itens e $m$ recursos. Cada item $j \in \{1, \ldots, n\}$
+tem um valor $p_j > 0$ e consome uma quantidade $w_{ij} \geq 0$ de cada recurso
+$i \in \{1, \ldots, m\}$, cuja capacidade total é $c_i > 0$. Seja $x_j$ uma
+variável binária que vale 1 se o item $j$ for escolhido e 0 caso contrário. O
+\acs{mkp} pode ser formulado como o modelo de \acs{pli} dado pelas
+\crefrange{eq:mkp:objetivo}{eq:mkp:dominio} \cite{kellerer2004knapsack}.
+\begin{align}
+  \max \quad & \sum_{j=1}^{n} p_j \, x_j \label{eq:mkp:objetivo} \\
+  \text{sujeito a} \quad & \sum_{j=1}^{n} w_{ij} \, x_j \leq c_i,
+      && i = 1, \ldots, m, \label{eq:mkp:capacidade} \\
+  & x_j \in \{0, 1\}, && j = 1, \ldots, n. \label{eq:mkp:dominio}
+\end{align}
+
+A \cref{eq:mkp:objetivo} maximiza o valor total dos itens escolhidos. As
+restrições~\eqref{eq:mkp:capacidade} garantem que a capacidade de cada recurso
+seja respeitada e as restrições~\eqref{eq:mkp:dominio} definem o domínio das
+variáveis. Quando $m = 1$, o modelo se reduz ao problema da mochila clássico,
+que pode ser resolvido em tempo pseudopolinomial por programação dinâmica. Para
+$m \geq 2$, o problema é fortemente NP-difícil \cite{kellerer2004knapsack}.
+
+\begin{instrucao}
+\orientacao{Equações}
+Use \verb|equation| para uma equação e \verb|align| para várias alinhadas
+(o \verb|&| marca o ponto de alinhamento). Toda equação citada no texto
+precisa de \verb|\label|. Para não numerar uma linha, use \verb|\notag|.
+\begin{exemplo}
+A área do círculo é dada pela
+\cref{eq:area}.
+\begin{equation}
+  A = \pi r^2,
+  \label{eq:area}
+\end{equation}
+em que $r$ é o raio.
+\end{exemplo}
+Algumas regras:
+\begin{itemize}
+  \item a equação faz parte da frase, por isso termina com vírgula ou ponto
+        conforme o texto que a segue;
+  \item defina cada símbolo na primeira vez que ele aparece;
+  \item use a vírgula como separador decimal, também nas fórmulas: \verb|$3,14$|
+        produz $3,14$ (o pacote \verb|icomma| evita o espaço depois da vírgula);
+  \item para várias equações use \verb|\crefrange{eq:a}{eq:c}|, que gera
+        ``Equações (1) a (3)''.
+\end{itemize}
+\end{instrucao}
+
+% ------------------------------------------------------------------------------
+\section{Programação linear inteira}
+\label{sec:fundamentacao:pli}
+
+Modelos de \acs{pli} são resolvidos, em geral, pelo método \emph{branch-and-bound}
+e suas variantes, que dividem o problema em subproblemas e usam a relaxação
+linear de cada um para descartar regiões do espaço de busca que não podem
+conter a solução ótima \cite{wolsey2020integer}. A relaxação linear é obtida
+substituindo a restrição~\eqref{eq:mkp:dominio} por $0 \leq x_j \leq 1$, o que
+transforma o modelo em um problema de programação linear, resolvível em tempo
+polinomial.
+
+A eficiência desse processo depende da qualidade dos limitantes obtidos. No
+\acs{mkp}, a diferença entre o valor da relaxação linear e o da solução ótima
+tende a diminuir com o aumento do número de itens, mas o número de subproblemas
+explorados cresce rapidamente com o número de restrições
+\cite{puchinger2010multidimensional}. Solucionadores modernos, como o HiGHS
+\cite{huangfu2018parallelizing}, combinam esse método com planos de corte e
+heurísticas primais, o que os torna competitivos em instâncias pequenas e
+médias.
+
+\begin{instrucao}
+\orientacao{Citação direta}
+A citação direta reproduz literalmente o texto da fonte e sempre informa a
+página. Com até três linhas, fica no próprio parágrafo, entre aspas duplas.
+\begin{exemplo}
+A portaria define alucinação como
+``informação aparentemente plausível,
+porém incorreta, imprecisa ou
+inventada'' \cite[p.~1]{ufes2026portaria}.
+\end{exemplo}
+Com mais de três linhas, use o ambiente \verb|citacao|, que aplica recuo de
+4~cm, fonte menor e espaçamento simples, sem aspas.
+\begin{exemplo}
+\begin{citacao}
+O usuário é responsável pela precisão,
+pela originalidade e pela adequação dos
+conteúdos gerados ou modificados por
+sistema de inteligência artificial que
+utilizar, devendo verificá-los antes de
+sua utilização, considerada a
+possibilidade de alucinação
+\cite[p.~5]{ufes2026portaria}.
+\end{citacao}
+\end{exemplo}
+Indique supressões no meio do trecho com \verb|[...]| e destaques seus com a
+expressão ``grifo nosso'' após a página.
+\end{instrucao}
+
+% ------------------------------------------------------------------------------
+\section{Metaheurísticas e busca local iterada}
+\label{sec:fundamentacao:ils}
+
+Metaheurísticas são estratégias gerais que guiam heurísticas subordinadas na
+exploração do espaço de soluções, com o objetivo de escapar de ótimos locais.
+Uma das mais simples é a \ac{ils}, que alterna duas fases: uma busca local, que
+melhora a solução corrente até atingir um ótimo local, e uma perturbação, que
+modifica esse ótimo local para gerar um novo ponto de partida
+\cite{lourenco2019iterated}. Se a busca local a partir do ponto perturbado
+encontrar uma solução melhor, ela passa a ser a solução corrente. Caso
+contrário, um critério de aceitação decide se a busca continua a partir da
+nova solução ou retorna à anterior.
+
+A \cref{fig:ils} ilustra esse comportamento em um problema de maximização. A
+partir de uma solução inicial $s_0$, a busca local sobe até o ótimo local
+$s^*$. A perturbação leva a busca para $s'$, fora da região de atração de
+$s^*$, e uma nova busca local alcança $s^{*\prime}$, de valor maior. A
+intensidade da perturbação é o parâmetro central do método. Perturbações
+fracas fazem a busca local retornar ao mesmo ótimo e perturbações fortes
+equivalem a reiniciar a busca de um ponto aleatório
+\cite{lourenco2019iterated}.
+
+\begin{figure}[htbp]
+  \centering
+  \caption{Funcionamento da \acs{ils} em um problema de maximização}
+  \label{fig:ils}
+  \begin{tikzpicture}
+    \begin{axis}[
+        width=0.85\textwidth, height=6cm,
+        domain=0:10, samples=200,
+        axis lines=left, xtick=\empty, ytick=\empty,
+        xlabel={Espaço de soluções}, ylabel={Valor da solução},
+        ymin=1.8, ymax=6.2, clip=false,
+      ]
+      \addplot[thick, black] {3 + sin(deg(x)) + 0.5*sin(deg(2.7*x)) + 0.15*x};
+      \node[circle, fill=black, inner sep=1.6pt, label=below:{$s_0$}] (s0) at (axis cs:4.6,2.62) {};
+      \node[circle, fill=black, inner sep=1.6pt, label=above:{$s^*$}] (s1) at (axis cs:5.49,3.50) {};
+      \node[circle, draw=black, fill=white, inner sep=1.6pt, label=below right:{$s'$}] (s2) at (axis cs:6.5,3.71) {};
+      \node[circle, fill=black, inner sep=1.6pt, label=above:{$s^{*\prime}$}] (s3) at (axis cs:7.66,5.61) {};
+      \draw[-{Stealth}, thick, gray] (s0) to[bend right=25] node[right, font=\footnotesize, black] {busca local} (s1);
+      \draw[-{Stealth}, thick, dashed] (s1) to[bend left=40] node[above, font=\footnotesize] {perturbação} (s2);
+      \draw[-{Stealth}, thick, gray] (s2) to[bend right=25] node[right, font=\footnotesize, black] {busca local} (s3);
+    \end{axis}
+  \end{tikzpicture}
+  \fonteautor
+\end{figure}
+
+\begin{instrucao}
+\orientacao{Figuras: inclusão, citação e qualidade}
+Pela NBR 14724, a identificação da figura (a palavra ``Figura'', o número e
+o título) fica \textbf{acima} dela e a fonte fica \textbf{abaixo}, mesmo quando a figura foi
+feita por você. Por isso, no LaTeX, o \verb|\caption| vem antes do conteúdo e
+o \verb|\fonte| depois. Para material próprio, use \verb|\fonteautor|, que
+escreve ``Fonte: Elaborado pelo próprio autor''. Para figura adaptada de outra
+obra, escreva \verb|\fonte{Adaptado de \textcite{chave}.}|.
+\begin{exemplocodigo}
+\begin{figure}[htbp]
+  \centering
+  \caption{Arquitetura do sistema}
+  \label{fig:arquitetura}
+  \includegraphics[width=0.8\textwidth]{figuras/arquitetura.pdf}
+  \fonteautor
+\end{figure}
+\end{exemplocodigo}
+
+\textbf{Toda figura, tabela, quadro, código ou algoritmo incluído no trabalho
+deve ser citado no texto pelo menos uma vez}, de preferência antes de aparecer.
+Ao citar, escreva o nome com inicial maiúscula seguido do número, como em
+``a Figura 3 mostra'', e não ``a figura 3''. O mesmo vale para Tabela, Quadro,
+Código, Algoritmo, Equação e Seção. Os comandos \verb|\cref| e \verb|\Cref| já
+escrevem o nome dessa forma. Não basta citar. Explique no texto o que deve ser observado na
+figura. Gráficos e diagramas mais complexos pedem um ou dois parágrafos de
+explicação, como foi feito acima para a \cref{fig:ils}.
+
+\textbf{Como obter figuras de boa qualidade}
+\begin{itemize}
+  \item Prefira figuras \textbf{vetoriais} (PDF, EPS ou desenhadas em TikZ),
+        que não perdem nitidez com o zoom nem na impressão. Esta figura foi
+        desenhada em TikZ diretamente no texto.
+  \item Gráficos feitos em Python devem ser salvos em PDF:
+        \verb|plt.savefig("grafico.pdf", bbox_inches="tight")|. Guarde também o
+        script que gerou o gráfico, para poder refazê-lo.
+  \item Diagramas feitos no draw.io (diagrams.net), no Inkscape ou em
+        ferramentas UML devem ser exportados em PDF ou SVG (convertido para
+        PDF), nunca capturados com \emph{print screen}.
+  \item Capturas de tela de sistemas devem ser salvas em PNG, na resolução
+        original e com o zoom do navegador em 100\%. Evite JPEG em diagramas e
+        capturas de tela, porque a compressão borra textos e linhas.
+  \item Ajuste apenas a largura (\verb|width=|). Alterar largura e altura ao
+        mesmo tempo distorce a imagem.
+  \item O texto dentro da figura deve ter tamanho próximo ao das legendas.
+        Uma figura com letras minúsculas foi feita grande demais e reduzida.
+  \item Use cores que continuem distinguíveis em escala de cinza e para
+        pessoas com daltonismo. Variar também o tipo de linha e de marcador
+        ajuda.
+  \item Mantenha o mesmo estilo (fonte, espessura de linhas, cores) em todas
+        as figuras do trabalho e o mesmo alinhamento (centralizado), como pede
+        a NBR 14724:2024.
+\end{itemize}
+\end{instrucao}
+
+A eficácia da \acs{ils} depende, portanto, da busca local, da perturbação e
+do critério de aceitação, componentes que precisam ser ajustados a cada
+problema. O \cref{cap:metodologia} descreve como cada um deles foi definido
+para o \acs{mkp}.
