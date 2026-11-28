@@ -12,24 +12,40 @@ O modelo segue as normas da ABNT vigentes:
 
 Também atende ao Art. 19 da Portaria Normativa nº 310/2026 da Ufes, que exige a declaração do uso de inteligência artificial.
 
+No curso de Engenharia de Computação, o TCC se chama **Projeto de Graduação**. O comando `\curso{ec}` ajusta esse nome na folha de rosto e na folha de aprovação. Nas caixas de orientação, o termo TCC vale para os dois cursos.
+
 ## Qual modelo usar
 
-O TCC pode ser do tipo **científico** (o foco está na pesquisa) ou **tecnológico** (o foco está no produto). Há um arquivo principal para cada tipo:
+Há um arquivo principal para cada tipo de trabalho:
 
-| Tipo | Arquivo principal | Pasta de conteúdo | Exemplo fictício |
-|---|---|---|---|
-| Científico | `tcc-cientifico.tex` | `cientifico/` | heurística para o problema da mochila multidimensional |
-| Tecnológico | `tcc-tecnologico.tex` | `tecnologico/` | sistema web para agendamento de monitorias |
+| Arquivo principal | Pasta de conteúdo | Exemplo fictício |
+|---|---|---|
+| `tcc-cientifico.tex` | `cientifico/` | heurística para o problema da mochila multidimensional |
+| `tcc-tecnologico.tex` | `tecnologico/` | sistema web para agendamento de monitorias |
+
+A escolha depende da modalidade prevista nas normas de cada curso:
+
+| Curso | Modalidade | Modelo |
+|---|---|---|
+| Ciência da Computação | Projeto científico | `tcc-cientifico.tex` |
+| Ciência da Computação | Projeto tecnológico | `tcc-tecnologico.tex` |
+| Engenharia de Computação | Projeto de Pesquisa Científica | `tcc-cientifico.tex` |
+| Engenharia de Computação | Projeto de software | `tcc-tecnologico.tex` |
+| Engenharia de Computação | Projeto de hardware ou Projeto Técnico Profissional | `tcc-tecnologico.tex`, adaptado conforme a caixa de orientação no fim da Introdução |
 
 Escolha um deles e apague o outro arquivo principal e a outra pasta. As pastas `config/`, `comum/`, `figuras/` e `codigos/` e o arquivo `referencias.bib` servem aos dois.
 
 ## Por onde começar
 
-1. Preencha `cientifico/dados.tex` (ou `tecnologico/dados.tex`): curso, título, autor, orientador e banca. O comando `\curso{cc}` ou `\curso{ec}` ajusta o nome do curso e do grau na capa, na folha de rosto e na folha de aprovação.
+1. Preencha `cientifico/dados.tex` (ou `tecnologico/dados.tex`): curso, título, autor, orientador e banca. O comando `\curso{cc}` ou `\curso{ec}` ajusta o curso, o grau e o nome do trabalho (TCC ou Projeto de Graduação) na capa, na folha de rosto e na folha de aprovação. O orientador ou o coorientador precisa ser docente do DCE.
 2. Leia as caixas azuis de **Orientação** em cada capítulo. Elas explicam o que escrever em cada parte e mostram exemplos de LaTeX.
 3. Substitua o texto de exemplo pelo seu, capítulo por capítulo.
 4. Declare as siglas em `siglas.tex` e as referências em `referencias.bib`.
 5. Na versão entregue à banca, desligue as caixas de orientação (veja abaixo).
+
+## Monografia ou artigo
+
+As normas dos dois cursos permitem entregar o trabalho como monografia ou como artigo científico. Este modelo é para a monografia. Para o artigo, o formato é definido pelo colegiado. Uma opção comum na Computação são os modelos da Sociedade Brasileira de Computação (SBC), disponíveis no Overleaf: <https://www.overleaf.com/latex/templates/tagged/sbc>. Mesmo no formato de artigo, a declaração de uso de inteligência artificial continua obrigatória.
 
 ## Compilação
 
@@ -74,7 +90,7 @@ cientifico/ e tecnologico/
   resumo.tex, abstract.tex
   capitulos/              um arquivo por capítulo
   apendices/              declaração de uso de IA e demais apêndices
-figuras/                  imagens (brasão e figuras dos exemplos)
+figuras/                  imagens (marca da Ufes e figuras dos exemplos)
 codigos/                  códigos incluídos com \lstinputlisting
 ```
 

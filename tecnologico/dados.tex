@@ -16,7 +16,10 @@
 \data{2026}
 
 % Orientador e coorientador, com titulação. Para orientadora, use
-% \orientador[Orientadora:]{Profa. Dra. Nome}. Sem coorientador, apague a linha.
+% \orientador[Orientadora:]{Profa. Dra. Nome}. Pelas regras dos colegiados, o
+% orientador ou o coorientador precisa ser docente do Departamento de
+% Computação e Eletrônica (DCE). Se o orientador for de outro departamento,
+% indique um coorientador do DCE. Sem coorientador, apague ou comente a linha.
 \orientador{Prof. Dr. Nome do Orientador}
 % \coorientador{Prof. Me. Nome do Coorientador}
 
@@ -24,7 +27,11 @@
 \dataaprovacao{}
 
 % Banca examinadora: \membrobanca{Nome com titulação}{Instituição}{Função}.
-% O orientador é o primeiro membro.
+% A banca tem três membros e o orientador, que a preside, é o primeiro. Os
+% demais podem ser docentes da Ufes ou de outras instituições, ou ainda
+% profissionais da área. Para um profissional externo, informe a empresa no
+% lugar da instituição, por exemplo:
+% \membrobanca{Eng. Nome do Profissional}{Nome da Empresa}{Examinador externo}
 \membrobanca{Prof. Dr. Nome do Orientador}{Universidade Federal do Espírito Santo}{Orientador}
 \membrobanca{Prof. Dr. Nome do Examinador}{Universidade Federal do Espírito Santo}{Examinador interno}
 \membrobanca{Profa. Dra. Nome da Examinadora}{Instituição de origem}{Examinadora externa}

@@ -14,26 +14,32 @@
 % ------------------------------------------------------------------------------
 % Curso: \curso{cc} (Ciência da Computação) ou \curso{ec} (Engenharia de Computação)
 % ------------------------------------------------------------------------------
+% Em Engenharia de Computação, o TCC se chama Projeto de Graduação (nome da
+% disciplina nas normas do curso). O comando \curso ajusta o curso, o grau e
+% o nome do trabalho na folha de rosto e na folha de aprovação.
 \newcommand{\imprimircurso}{Ciência da Computação}
 \newcommand{\imprimirgrau}{Bacharel em Ciência da Computação}
+\newcommand{\imprimirtipotcc}{Trabalho de Conclusão de Curso}
 \newcommand{\curso}[1]{%
   \ifthenelse{\equal{#1}{ec}}{%
     \renewcommand{\imprimircurso}{Engenharia de Computação}%
     \renewcommand{\imprimirgrau}{Bacharel em Engenharia de Computação}%
+    \renewcommand{\imprimirtipotcc}{Projeto de Graduação}%
   }{%
     \renewcommand{\imprimircurso}{Ciência da Computação}%
     \renewcommand{\imprimirgrau}{Bacharel em Ciência da Computação}%
+    \renewcommand{\imprimirtipotcc}{Trabalho de Conclusão de Curso}%
   }%
 }
 \newcommand{\imprimircolegiado}{Colegiado do Curso de \imprimircurso}
 
 % Natureza do trabalho (folha de rosto e folha de aprovação).
 \newcommand{\imprimirnatureza}{%
-  Trabalho de Conclusão de Curso apresentado ao \imprimircolegiado{} do
+  \imprimirtipotcc{} apresentado ao \imprimircolegiado{} do
   \imprimircentro{} da \imprimiruniversidade, como requisito parcial para
   obtenção do grau de \imprimirgrau.}
 \preambulo{\imprimirnatureza}
-\tipotrabalho{Trabalho de Conclusão de Curso (Graduação)}
+\tipotrabalho{\imprimirtipotcc{} (Graduação)}
 
 \local{São Mateus, ES}
 
@@ -75,7 +81,6 @@
     \includegraphics[width=3.3cm]{figuras/logo-ufes}\par
     \vspace{0.6cm}
     {\bfseries
-      % \MakeTextUppercase{\imprimiruniversidade}\par
       \MakeTextUppercase{\imprimircentro}\par
       \MakeTextUppercase{\imprimirdepartamento}\par
       \MakeTextUppercase{\imprimircolegiado}\par}

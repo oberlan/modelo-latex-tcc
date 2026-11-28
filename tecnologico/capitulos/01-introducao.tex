@@ -24,8 +24,8 @@ A NBR 14724:2024 determina que o trabalho seja dividido em seções, e não em
 capítulos. No LaTeX nada muda (continue usando \verb|\chapter|, que gera o
 título ``1 INTRODUÇÃO''). A diferença está só no nome usado nas referências
 cruzadas, que este modelo controla pelo comando \verb|\termocap| em
-\verb|config/estilo.tex|. O padrão segue as regras de TCC do curso
-(``Capítulo'').
+\verb|config/estilo.tex|. O padrão do modelo é ``Capítulo'', o termo mais
+usado nos cursos.
 
 \orientacao{Rótulos}
 Logo após cada \verb|\chapter| ou \verb|\section|, coloque um
@@ -217,8 +217,9 @@ aplicados a um problema real da comunidade acadêmica
 Descreva o processo seguido (Scrum, Kanban, processo incremental), como os
 requisitos foram levantados, como o trabalho foi dividido em ciclos e como o
 progresso foi acompanhado. Se fez estudo de viabilidade, cronograma e análise
-de riscos, como pedem as competências do TCC, resuma-os aqui e coloque os
-detalhes em um apêndice, como no \cref{ap:planejamento}.
+de riscos (previstos nas competências do TCC de Ciência da Computação e úteis
+em qualquer projeto), resuma-os aqui e coloque os detalhes em um apêndice,
+como no \cref{ap:planejamento}.
 \end{instrucao}
 
 O sistema foi desenvolvido com um processo iterativo baseado no Scrum
@@ -248,3 +249,38 @@ sistema. O \cref{cap:projeto} descreve a arquitetura e os modelos de
 software. O \cref{cap:implementacao} trata da implementação e o
 \cref{cap:testes} apresenta a verificação e a avaliação com usuários. Por fim, o \cref{cap:conclusao}
 apresenta as considerações finais.
+
+\begin{instrucao}
+\orientacao{Projetos de hardware e projetos técnicos profissionais}
+Este modelo traz o exemplo de um projeto de software. As normas de Engenharia
+de Computação admitem também projetos de hardware e projetos técnicos
+profissionais. Nesses casos, aproveite a estrutura do modelo e adapte os
+capítulos que vão dos requisitos aos testes. Para um projeto de hardware, uma
+organização possível é:
+\begin{enumerate}
+  \item Introdução;
+  \item Fundamentação teórica e tecnologias (princípios físicos, sensores,
+        microcontroladores, protocolos de comunicação);
+  \item Soluções relacionadas (produtos e protótipos semelhantes, com quadro
+        comparativo de funcionalidades e custos);
+  \item Especificação de requisitos (funcionais, elétricos, de consumo de
+        energia, ambientais e de custo);
+  \item Projeto do hardware (diagrama de blocos, seleção de componentes,
+        esquemáticos e arquitetura do \emph{firmware});
+  \item Implementação (montagem, placa de circuito impresso, programação do
+        \emph{firmware} e fotos do protótipo);
+  \item Testes e medições (procedimentos, instrumentos usados, resultados e
+        comparação com os requisitos);
+  \item Considerações finais.
+\end{enumerate}
+Inclua uma estimativa de custos, com um quadro de componentes, quantidades e
+preços (informe a data da cotação). Esquemáticos completos e listas de
+materiais vão para os apêndices. Exporte os esquemáticos do KiCad, ou da
+ferramenta que usar, em PDF, para manter a qualidade vetorial.
+
+Um projeto técnico profissional segue a lógica de um projeto de engenharia.
+Ele parte do problema e dos requisitos, compara alternativas e apresenta a
+solução escolhida com memorial descritivo e de cálculo, especificações, custos
+e cronograma de execução. Defina a estrutura com o orientador, a partir dos
+documentos que esse tipo de projeto exige na prática profissional.
+\end{instrucao}
